@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="black">#737373</color>
+    <!--透明-->
+    <color name="transparent">#00000000</color>
+
+    <color name="bg_login">#A55CF8</color>
+
+    <color name="bg_input">#FFF0FF</color>
+
+    <color name="login_problem">#FFC354</color>
+
+    <color name="login_btn">#FFA7A1</color>
+
+</resources>

@@ -1,0 +1,25 @@
+ext {
+
+    android = [
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
+            flavorDimensions : "",
+            minSdkVersion    : 17,
+            targetSdkVersion : 28,
+            versionCode      : 1,
+            versionName      : "1.0"
+    ]
+
+    //Version
+    supportLibrary = "25.3.1"
+
+
+    dependencies = [
+            appcompatV7                  : "com.android.support:appcompat-v7:${supportLibrary}",
+            supportV4                    : "com.android.support:support-v4:${supportLibrary}",
+            design                       : "com.android.support:design:${supportLibrary}",
+            glide                        : "com.github.bumptech.glide:glide:3.7.0",
+            butterknife                  : "com.jakewharton:butterknife:8.6.0",
+            butterknifeCompiler          : "com.jakewharton:butterknife-compiler:8.6.0"
+    ]
+}

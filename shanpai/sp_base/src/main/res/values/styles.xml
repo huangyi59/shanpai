@@ -1,0 +1,22 @@
+<resources>
+
+    <style name="dialog_bg_transparent" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="AppProgressBarStyle" parent="@android:style/Widget.DeviceDefault.ProgressBar">
+        <item name="android:minHeight">30dip</item>
+        <item name="android:minWidth">30dip</item>
+        <item name="android:maxHeight">30dip</item>
+        <item name="android:maxWidth">30dip</item>
+        <!--<item name="android:indeterminateTint">你自定义的颜色</item>-->
+    </style>
+
+    <style name="FullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+</resources>

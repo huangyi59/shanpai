@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">闪拍</string>
+
+    <!-- 我的页面 -->
+    <string name="fance">粉丝</string>
+    <string name="attention">关注</string>
+    <string name="praise">获赞</string>
+
+    <!-- 登录页面 -->
+    <string name="input_phone_number">请输入手机号</string>
+    <string name="input_phone_code">请输入验证码</string>
+    <string name="get_code">获取验证码</string>
+    <string name="other_login_methos">其他登录方式</string>
+    <string name="login_problem">登录遇到问题？</string>
+    <string name="pwd_login">密码登录</string>
+    <string name="login">立即登录</string>
+    <string name="user_agreement">已阅读并同意用户协议</string>
+
+</resources>

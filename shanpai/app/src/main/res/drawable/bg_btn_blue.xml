@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 圆角 -->
+    <corners android:radius="@dimen/dp5" />
+    <!-- 渐变 angle 0 从左到右 90 从下到上 -->
+    <gradient
+        android:endColor="#F3544D"
+        android:startColor="#FF8881"
+        android:gradientRadius="@dimen/dp5"
+        android:type="linear"
+        android:angle="0"/>
+
+</shape>
