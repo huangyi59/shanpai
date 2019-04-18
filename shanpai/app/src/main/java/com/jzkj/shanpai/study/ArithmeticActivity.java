@@ -10,6 +10,8 @@ import sp.base.utils.LogUtil;
 
 /**
  * 算法，算法的稳定性是指数组中相同的值，是否会产生位置交换
+ * 时间复杂度：一个算法中的语句执行次数称为语句频度或时间频度。记为T(n)
+ * 空间复杂度：一个算法的空间复杂度(Space Complexity)S(n)定义为该算法所耗费的存储空间
  */
 public class ArithmeticActivity extends Activity {
 
@@ -25,11 +27,12 @@ public class ArithmeticActivity extends Activity {
     }
 
     private void sort() {
-        int array[] = {5, 4, 6, 3, 8,7};
+        int array[] = {5, 4, 6, 3, 8, 7};
         //bubbleSort(array);
         //selectSort(array);
+        quickSort(array, 0, array.length - 1);
         print(array);
-        LogUtil.e("tag",binarySearch(array, 1,array.length)+"------");
+        LogUtil.e("tag", binarySearch(array, 1, array.length) + "------");
     }
 
     private void print(int[] array) {
@@ -45,55 +48,53 @@ public class ArithmeticActivity extends Activity {
         tvShow.setText(sb.toString());
     }
 
+    private void gbSort(){
+
+    }
+
     /**
-     *
      * 虚拟机栈 每一个方法都会创建一个栈帧 对应方法的出和入 局部变量表（基本数据类型，引用或则句柄） 方法的出入口 动态链接 操作数栈
      * 快速排序 选取数组中的一个数，将所有比它小的都放到它左边，所有比它大的数都放到右边 a1 a(n-1) 一轮排序结束后将pivot的和left
      * 所在位置交换
-     * 时间复杂度：
-     * 空间复杂度：
+     * 时间复杂度： 比较趟数 1      2       3      4    .... k
+     * n    n/2*2   n/2*3  n/2*4     n/2*k >=1 每一次一分为二，2^K = n,k=log(n),每一次最多交换n次 O（nlog(n)）
+     * <p>
+     * 空间复杂度： O(logn)
+     * <p/>
+     * 稳定性：不稳定
      */
-    private void quickSort(int arr[], int low, int high) {
-        if (arr == null)
+    private void quickSort(int a[], int left, int right) {
+        if (a == null)
             throw new NullPointerException("array is null");
 
-        if (arr.length == 0)
+        if (a.length == 0)
             return;
 
-        int left = low,right = high;
-
-        if(left >= right){
+        if(left >= right )
             return;
-        }
 
-        while(low <= high){
-            int index = partSort(arr,low,high);
-            quickSort(arr,left,index-1);
-            quickSort(arr,index+1,right);
-        }
-        //挡板 大的放在右边，小的放在左边
-    }
+        int low = left, high = right, pivot = a[left];
 
-    private int partSort(int arr[],int left,int right){
-        int pivot = arr[left];
-        while(left < right){
-            while(left < right && arr[left] <= pivot){
-                left ++;
-            }
-            while(left < right && arr[right] >= pivot){
-                right --;
-            }
-            swap(arr,left,right);
+        while (low != high) {
+            while (low < high && a[high] >= pivot)
+                high--;
+            if (high > low)
+                a[low] = a[high];//a[i]已经赋值给temp,所以直接将a[j]赋值给a[i],赋值完之后a[j],有空位
+            while (low < high && a[low] <= pivot)
+                low++;
+            if (low < high)
+                a[high] = a[low];
         }
-        //一轮快速排序后，交换left 和 pivot的位置
-        swap(arr,left,pivot);
-        return left;
+        a[low] = pivot;//把基准插入,此时i与j已经相等R[low..pivotpos-1].keys≤R[pivotpos].key≤R[pivotpos+1..high].keys
+        quickSort(a, left, low - 1);/*递归左边*/
+        quickSort(a, low + 1, right);/*递归右边*/
     }
 
     /**
      * 二分查找 折半查找 序列有序 1，2，3，4，5     查询次数 1     2          3       4  ...     K
      * 时间复杂度 O(log2N)log以2为底n的对数       剩余次数 n/2   n/2*2      n/2*3   n/2*4     n/2*k >= 1
      * n/2*k >= 1
+     * 空间复杂度 O（1）
      */
     private int binarySearch(int arry[], int target, int size) {
         int low = 0, high = size - 1, mid;
@@ -117,6 +118,7 @@ public class ArithmeticActivity extends Activity {
      * 再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推
      * 时间复杂度 (n-1) + (n-2) + ... 2 + 1 等差数列求和Sn = n(a1+an)/2 = O(n*n/2) 最优情况是O(n)
      * 空间复杂度 O(1)
+     * 稳定性：稳定
      */
     private void selectSort(int arr[]) {
         for (int i = 0; i < arr.length - 1; i++) {
@@ -126,14 +128,16 @@ public class ArithmeticActivity extends Activity {
                     minIndex = j;
                 }
             }
+            //保证其稳定性
             if (i != minIndex) swap(arr, i, minIndex);
         }
     }
 
     /**
      * 冒泡排序   比较相邻的两个元素，较大者放后面
-     * 时间复杂度 (n-1) + (n-2) + ... 2 + 1 等差数列求和Sn = n(a1+an)/2 = O(n*n/2) 最优情况是O(n)
+     * 时间复杂度 (n-1) + (n-2) + ... 2 + 1 等差数列求和Sn = n(a1+an)/2 = O(n*n/2) 最优情况是O(n*n)
      * 空间复杂度 O(1)
+     * 稳定性：稳定
      */
     private void bubbleSort(int[] arr) {
         boolean flag = false;
