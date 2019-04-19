@@ -48,8 +48,50 @@ public class ArithmeticActivity extends Activity {
         tvShow.setText(sb.toString());
     }
 
-    private void gbSort(){
+    public void sortArray(int arr[]){
+        int []temp = new int[arr.length];//在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间
+        //mergeSort();sort(arr,0,arr.length-1,temp);
+    }
 
+    /**
+     * 归并排序：该算法采用经典的分治（divide-and-conquer）策略（分治法将问题分(divide)成一些小的问题然后递归求解
+     * 时间复杂度：O(nlog(n))
+     * 空间复杂度：O(long(n))
+     * 稳定性：稳定排序
+     */
+    private void mergeSort(int arr[], int left, int right, int copy[]) {
+        if (arr == null) throw new NullPointerException("arr is null");
+
+        if (arr.length == 0) return;
+
+        if (left >= right) return;
+
+        //Integer.MAX_VALUE 0x7fffffff 0111 + 28个1 2^31 - 1
+        int mid = left + (right - left) / 2;
+    }
+
+    private void merge(int[] arr, int left, int mid, int right, int[] temp) {
+        int i = left;//左序列指针
+        int j = mid + 1;//右序列指针
+        int t = 0;//临时数组指针
+        while (i <= mid && j <= right) {
+            if (arr[i] <= arr[j]) {
+                temp[t++] = arr[i++];
+            } else {
+                temp[t++] = arr[j++];
+            }
+        }
+        while (i <= mid) {//将左边剩余元素填充进temp中
+            temp[t++] = arr[i++];
+        }
+        while (j <= right) {//将右序列剩余元素填充进temp中
+            temp[t++] = arr[j++];
+        }
+        t = 0;
+        //将temp中的元素全部拷贝到原数组中
+        while (left <= right) {
+            arr[left++] = temp[t++];
+        }
     }
 
     /**
@@ -63,31 +105,31 @@ public class ArithmeticActivity extends Activity {
      * <p/>
      * 稳定性：不稳定
      */
-    private void quickSort(int a[], int left, int right) {
-        if (a == null)
+    private void quickSort(int arr[], int left, int right) {
+        if (arr == null)
             throw new NullPointerException("array is null");
 
-        if (a.length == 0)
+        if (arr.length == 0)
             return;
 
-        if(left >= right )
+        if (left >= right)
             return;
 
-        int low = left, high = right, pivot = a[left];
+        int low = left, high = right, pivot = arr[left];
 
         while (low != high) {
-            while (low < high && a[high] >= pivot)
+            while (low < high && arr[high] >= pivot)
                 high--;
             if (high > low)
-                a[low] = a[high];//a[i]已经赋值给temp,所以直接将a[j]赋值给a[i],赋值完之后a[j],有空位
-            while (low < high && a[low] <= pivot)
+                arr[low] = arr[high];//a[i]已经赋值给temp,所以直接将a[j]赋值给a[i],赋值完之后a[j],有空位
+            while (low < high && arr[low] <= pivot)
                 low++;
             if (low < high)
-                a[high] = a[low];
+                arr[high] = arr[low];
         }
-        a[low] = pivot;//把基准插入,此时i与j已经相等R[low..pivotpos-1].keys≤R[pivotpos].key≤R[pivotpos+1..high].keys
-        quickSort(a, left, low - 1);/*递归左边*/
-        quickSort(a, low + 1, right);/*递归右边*/
+        arr[low] = pivot;//把基准插入,此时i与j已经相等R[low..pivotpos-1].keys≤R[pivotpos].key≤R[pivotpos+1..high].keys
+        quickSort(arr, left, low - 1);/*递归左边*/
+        quickSort(arr, low + 1, right);/*递归右边*/
     }
 
     /**
