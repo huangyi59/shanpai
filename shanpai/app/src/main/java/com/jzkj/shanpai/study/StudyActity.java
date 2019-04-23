@@ -27,6 +27,7 @@ public class StudyActity extends Activity {
                 skipToActivity(this,ArithmeticActivity.class);
                 break;
             case R.id.btn_data_stucture:
+                skipToActivity(this,DataStructeActivity.class);
                 break;
             case R.id.btn_okhtt3:
                 break;
@@ -45,5 +46,7 @@ public class StudyActity extends Activity {
         Intent intent = new Intent(activity,toClass);
         startActivity(intent);
     }
+
+
 
 }
