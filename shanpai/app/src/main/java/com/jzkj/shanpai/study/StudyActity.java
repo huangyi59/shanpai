@@ -20,7 +20,7 @@ public class StudyActity extends Activity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btn_arithmetic, R.id.btn_data_stucture, R.id.btn_okhtt3, R.id.btn_retrofit, R.id.btn_rxjava, R.id.btn_glide})
+    @OnClick({R.id.btn_arithmetic, R.id.btn_data_stucture,R.id.btn_android, R.id.btn_okhtt3, R.id.btn_retrofit, R.id.btn_rxjava, R.id.btn_glide})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_arithmetic:
@@ -28,6 +28,9 @@ public class StudyActity extends Activity {
                 break;
             case R.id.btn_data_stucture:
                 skipToActivity(this,DataStructeActivity.class);
+                break;
+            case R.id.btn_android:
+                skipToActivity(this,AndroidActivity.class);
                 break;
             case R.id.btn_okhtt3:
                 break;

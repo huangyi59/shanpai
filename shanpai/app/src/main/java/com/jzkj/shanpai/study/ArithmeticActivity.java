@@ -9,9 +9,11 @@ import com.jzkj.shanpai.R;
 import sp.base.utils.LogUtil;
 
 /**
+ * @author huangyi
  * 算法，算法的稳定性是指数组中相同的值，是否会产生位置交换
  * 时间复杂度：一个算法中的语句执行次数称为语句频度或时间频度。记为T(n)
  * 空间复杂度：一个算法的空间复杂度(Space Complexity)S(n)定义为该算法所耗费的存储空间
+ * 虚拟机栈 每一个方法都会创建一个栈帧 对应方法的出和入 局部变量表（基本数据类型，引用或则句柄） 方法的出入口 动态链接 操作数栈
  */
 public class ArithmeticActivity extends Activity {
 
@@ -30,7 +32,8 @@ public class ArithmeticActivity extends Activity {
         int array[] = {5, 4, 6, 3, 8, 7};
         //bubbleSort(array);
         //selectSort(array);
-        quickSort(array, 0, array.length - 1);
+        //quickSort(array, 0, array.length - 1);
+        mergeSort(array);
         print(array);
         LogUtil.e("tag", binarySearch(array, 1, array.length) + "------");
     }
@@ -43,23 +46,23 @@ public class ArithmeticActivity extends Activity {
             } else {
                 sb.append(array[i]);
             }
-
         }
         tvShow.setText(sb.toString());
     }
 
-    public void sortArray(int arr[]){
-        int []temp = new int[arr.length];//在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间
-        //mergeSort();sort(arr,0,arr.length-1,temp);
+    public void mergeSort(int arr[]){
+        //在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间
+        int temp[] = new int[arr.length];
+        Sort(arr,0,arr.length-1,temp);
     }
 
     /**
      * 归并排序：该算法采用经典的分治（divide-and-conquer）策略（分治法将问题分(divide)成一些小的问题然后递归求解
      * 时间复杂度：O(nlog(n))
-     * 空间复杂度：O(long(n))
+     * 空间复杂度：O(log(n)+n) -->递归的栈空间  每次递归都会释放掉所占的辅助空间
      * 稳定性：稳定排序
      */
-    private void mergeSort(int arr[], int left, int right, int copy[]) {
+    private void Sort(int arr[], int left, int right, int temp[]) {
         if (arr == null) throw new NullPointerException("arr is null");
 
         if (arr.length == 0) return;
@@ -68,6 +71,9 @@ public class ArithmeticActivity extends Activity {
 
         //Integer.MAX_VALUE 0x7fffffff 0111 + 28个1 2^31 - 1
         int mid = left + (right - left) / 2;
+        Sort(arr,left,mid,temp);//左边归并排序，使得左子序列有序
+        Sort(arr,mid + 1,right,temp);//右边归并排序，使得右子序列有序
+        merge(arr,left,mid,right,temp);//将两个有序子数组合并操作
     }
 
     private void merge(int[] arr, int left, int mid, int right, int[] temp) {
@@ -95,13 +101,12 @@ public class ArithmeticActivity extends Activity {
     }
 
     /**
-     * 虚拟机栈 每一个方法都会创建一个栈帧 对应方法的出和入 局部变量表（基本数据类型，引用或则句柄） 方法的出入口 动态链接 操作数栈
      * 快速排序 选取数组中的一个数，将所有比它小的都放到它左边，所有比它大的数都放到右边 a1 a(n-1) 一轮排序结束后将pivot的和left
      * 所在位置交换
      * 时间复杂度： 比较趟数 1      2       3      4    .... k
      * n    n/2*2   n/2*3  n/2*4     n/2*k >=1 每一次一分为二，2^K = n,k=log(n),每一次最多交换n次 O（nlog(n)）
      * <p>
-     * 空间复杂度： O(logn)
+     * 空间复杂度： O(logn) -->递归的栈空间 快速排序每次递归都会返回一个中间值的位置，必须使用栈。所以空间复杂度就是栈用的空间
      * <p/>
      * 稳定性：不稳定
      */

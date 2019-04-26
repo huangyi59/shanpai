@@ -33,6 +33,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!-- 入口 -->
         <activity android:name=".activity.MainActivity"
             android:screenOrientation="portrait"
@@ -43,20 +44,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <!-- 引导页 -->
         <activity android:name=".activity.GuideActivity" android:screenOrientation="portrait"/>
+
         <!-- 登录页 -->
         <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait"/>
+
         <!-- 主Activity -->
         <activity android:name=".activity.home.activity.HomeActivity" android:screenOrientation="portrait"/>
+
         <!-- studyActivity -->
         <activity android:name=".study.StudyActity" android:screenOrientation="portrait"/>
+
         <!--  ArithmeticActivity -->
         <activity android:name=".study.ArithmeticActivity" android:screenOrientation="portrait"/>
+
+        <!--  ArithmeticActivity -->
+        <activity android:name=".study.DataStructeActivity" android:screenOrientation="portrait"/>
+
+        <!--  AndroidActivity -->
+        <activity android:name=".study.AndroidActivity"
+            />
+
         <!-- 发表短视频 -->
         <activity android:name=".activity.CameraActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme"/>
+
     </application>
 
 </manifest>
