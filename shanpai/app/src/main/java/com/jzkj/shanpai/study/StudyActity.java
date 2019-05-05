@@ -2,9 +2,13 @@ package com.jzkj.shanpai.study;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+
 import com.jzkj.shanpai.R;
 
 import butterknife.ButterKnife;
@@ -20,17 +24,21 @@ public class StudyActity extends Activity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btn_arithmetic, R.id.btn_data_stucture,R.id.btn_android, R.id.btn_okhtt3, R.id.btn_retrofit, R.id.btn_rxjava, R.id.btn_glide})
+    @OnClick({R.id.btn_arithmetic, R.id.btn_data_stucture, R.id.btn_android, R.id.btn_okhtt3, R.id.btn_retrofit, R.id.btn_rxjava, R.id.btn_glide})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_arithmetic:
-                skipToActivity(this,ArithmeticActivity.class);
+                skipToActivity(this, ArithmeticActivity.class);
                 break;
             case R.id.btn_data_stucture:
-                skipToActivity(this,DataStructeActivity.class);
+                skipToActivity(this, DataStructeActivity.class);
                 break;
             case R.id.btn_android:
-                skipToActivity(this,AndroidActivity.class);
+                //隐式启动
+                Intent intent = new Intent("com.test");
+                intent.addCategory("com.test1");
+                intent.setDataAndType(Uri.parse("http://abc"), "image/*");
+                startActivity(intent);
                 break;
             case R.id.btn_okhtt3:
                 break;
@@ -45,11 +53,10 @@ public class StudyActity extends Activity {
         }
     }
 
-    protected void skipToActivity(Activity activity,Class<? extends Activity> toClass){
-        Intent intent = new Intent(activity,toClass);
+    protected void skipToActivity(Activity activity, Class<? extends Activity> toClass) {
+        Intent intent = new Intent(activity, toClass);
         startActivity(intent);
     }
-
 
 
 }
