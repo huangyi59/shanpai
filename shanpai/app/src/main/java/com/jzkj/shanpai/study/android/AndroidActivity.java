@@ -18,7 +18,7 @@ import com.jzkj.shanpai.R;
  * Android官方文档对onResume的解释有这么一句，不能在onPause中做重量级的操作，因为必须onPause执行完成以后新的activity才能onResume，
  * 尽量在onStop中操作
  * <p/>
- * <p>
+ *
  * <p>
  * 横竖屏切换，先销毁在创建 不做特殊处理 activity —>onSaveInstanceState(onStop之前调用) -> onDestory
  * |
@@ -30,12 +30,19 @@ import com.jzkj.shanpai.R;
  * 单独设置不起作用，需要配合SingleTask, allowTaskReparenting 添加到启动他的那个Activity的任务栈
  * TaskAffinity属性和SingleTask结合存放单独栈  TaskAffinity属性和allowTaskReparenting结合
  * <p/>
+ *
  * <p>
  * IntentFilter的匹配规则
  * 设置多个action,匹配一个即可
  * 设置多个category设置多个，都要匹配才行
  * data由两部分组成
  * </p>
+ *
+ * <p>
+ *     startActivityForReult(Intent intent, int requestCode) code > 0
+ *     4.0和5.0之间的版本 startActivityForReult目标Activity为singleTask onActivityResult会被提前调用
+ * </p>
+ *
  */
 public class AndroidActivity extends Activity {
 
@@ -62,6 +69,11 @@ public class AndroidActivity extends Activity {
         //data的匹配规则
         intent.setDataAndType(Uri.parse("http://abc"),"video/mpeg");
         startActivity(intent);
+    }
+
+    private void start(){
+        Intent intent = new Intent(this,ProgressActivity.class);
+        startActivityForResult(intent,-1);
     }
 
     @Override
