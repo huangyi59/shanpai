@@ -44,10 +44,10 @@ import com.jzkj.shanpai.R;
  * </p>
  *
  */
-public class AndroidActivity extends Activity {
+public class AboutActivity extends Activity {
 
     private final String DEFALUT_SAVE = "DEFAULT_SAVE";
-    private final String TAG = AndroidActivity.class.getSimpleName();
+    private final String TAG = AboutActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class AndroidActivity extends Activity {
 
     private void startIntent() {
         Intent intent = new Intent();
-        intent.setClass(this, AndroidActivity.class);
+        intent.setClass(this, AboutActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //data的匹配规则

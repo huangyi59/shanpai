@@ -72,7 +72,7 @@ import java.io.ObjectOutputStream;
  *
  *          TCP和UDP的区别
  *          TCP面向连接的，UDP非面向连接的
- *          TCP有确认 窗口 重传 拥塞 控制机制比较耗时，UDP速度快，没有TCP的机制
+ *          TCP有确认 窗口 重传 拥塞 控制机制，比较耗时，UDP速度快，没有TCP的机制
  *          TCP保证数据的准确性，UDP传输过程容易丢失数据容易丢包
  *
  *          http和https的区别

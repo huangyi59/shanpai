@@ -23,8 +23,8 @@ android {
 
     applicationVariants.all { variant ->
         def apkName = ""
-        def createTime = new Date().format("MMddHHmm",TimeZone.getTimeZone("GMT+08:00"))
-        variant.productFlavors.each{ product ->
+        def createTime = new Date().format("MMddHHmm", TimeZone.getTimeZone("GMT+08:00"))
+        variant.productFlavors.each { product ->
             apkName = product.name
         }
         apkName = "${apkName}v${defaultConfig.versionName}_${variant.buildType.name}_${createTime}.apk"
@@ -34,11 +34,11 @@ android {
         }
     }
 
-    productFlavors{
-        _product{
+    productFlavors {
+        _product {
             buildConfigField('String', 'RUNTIME_ENVIRONMENT', '"_PRODUCT_"')
         }
-        _dev{
+        _dev {
             buildConfigField('String', 'RUNTIME_ENVIRONMENT', '"_DEV_"')
         }
     }

@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
             mIsFirstLaunch = true;
             mTime.setVisibility(View.GONE);
         }
-        startCountDown(mIsFirstLaunch ? 1 : 4);
+        startCountDown(mIsFirstLaunch ? 1 : 1);
     }
 
     /**

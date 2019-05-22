@@ -68,27 +68,32 @@
             android:name=".study.StudyActity"
             android:screenOrientation="portrait" />
 
-        <!--  ArithmeticActivity -->
+        <!-- ArithmeticActivity -->
         <activity
             android:name=".study.ArithmeticActivity"
             android:screenOrientation="portrait" />
 
-        <!--  ArithmeticActivity -->
+        <!-- ArithmeticActivity -->
         <activity
             android:name=".study.DataStructeActivity"
             android:screenOrientation="portrait" />
 
-        <!--  AndroidActivity 当编译选项中minSdkVersion targetSdkVersion均低于13 此选项不会导致Activity重启
-         taskAffinity属性需要配合singleTask 属性才会起作用 -->
-        <activity
-            android:name=".study.android.AndroidActivity"
-            >
+        <!--
+         AndroidActivity 当编译选项中minSdkVersion targetSdkVersion均低于13 此选项不会导致Activity重启
+         taskAffinity属性需要配合singleTask 属性才会起作用
+        -->
+        <activity android:name=".study.android.AboutActivity">
             <intent-filter>
+
                 <!-- 多个action匹配一个即可 多个category需要每个都匹配 data匹配分两个部分 type和uri -->
-                <action  android:name="com.test" />
-                <category android:name="com.test1"/>
+                <action android:name="com.test" />
+
+                <category android:name="com.test1" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" android:scheme="http" />
+
+                <data
+                    android:mimeType="image/*"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
 
@@ -98,6 +103,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme" />
 
+        <!-- 多进程模式 -->
+        <activity
+            android:name=".study.android.ProgressActivity"
+            android:process=":remote" />
+
+        <service android:name=".study.android.service.MyService" />
+
+        <activity android:name=".study.android.ViewActivity" />
+        <activity android:name=".study.android.ViewActivity2" />
+        <activity android:name=".study.android.ViewActivity3"></activity>
     </application>
 
 </manifest>

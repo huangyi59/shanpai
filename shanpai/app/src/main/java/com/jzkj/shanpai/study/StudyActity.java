@@ -15,6 +15,9 @@ import android.view.View;
 import com.jzkj.shanpai.Book;
 import com.jzkj.shanpai.IMyAidlInterface;
 import com.jzkj.shanpai.R;
+import com.jzkj.shanpai.study.android.ProgressActivity;
+import com.jzkj.shanpai.study.android.ViewActivity;
+import com.jzkj.shanpai.study.android.ViewActivity3;
 import com.jzkj.shanpai.study.android.service.MyService;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -30,8 +33,8 @@ public class StudyActity extends Activity implements ServiceConnection{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_study);
         ButterKnife.bind(this);
-        Intent intent = new Intent(this,MyService.class);
-        bindService(intent,this, Context.BIND_AUTO_CREATE);
+//        Intent intent = new Intent(this,MyService.class);
+//        bindService(intent,this, Context.BIND_AUTO_CREATE);
     }
 
     @OnClick({R.id.btn_arithmetic, R.id.btn_data_stucture, R.id.btn_android, R.id.btn_okhtt3, R.id.btn_retrofit, R.id.btn_rxjava, R.id.btn_glide})
@@ -44,7 +47,7 @@ public class StudyActity extends Activity implements ServiceConnection{
                 skipToActivity(this, DataStructeActivity.class);
                 break;
             case R.id.btn_android:
-                //skipToActivity(this, ProgressActivity.class);
+                skipToActivity(this, ViewActivity3.class);
                 break;
             case R.id.btn_okhtt3:
                 break;
