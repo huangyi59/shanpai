@@ -21,7 +21,9 @@ import com.jzkj.shanpai.R;
  *
  * View的measure过程和Activity的生命周期方法不是同步的，无法保证Activity执行了onCreate、onStart、onResume时某个View已经测量完毕
  *
- * View的测量其实就是对其宽高的测量 MeasureSpec
+ * View的测量其实就是对其宽高的测量 viewgroup（LinearLayout） -onmeasure measureChildren measure
+ *
+ * layout过程
  */
 public class ViewActivity2 extends AppCompatActivity {
 

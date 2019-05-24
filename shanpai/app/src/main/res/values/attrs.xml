@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+
+   <!-- 在xml中声明自定义属性集合 -->
+    <declare-styleable name="CircleView">
+        <attr name="circle_color" format="color"/>
+    </declare-styleable>
+
     <attr name="ruler_style" format="reference" />
-
-
     <!--方块指示器-->
     <declare-styleable name="IndicatorRectView" />
     <!-- 指示点个数 -->
