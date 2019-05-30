@@ -66,7 +66,7 @@ public class CustomView extends View {
         if(widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST){
             setMeasuredDimension(200,200);
         }else if(widthSpecMode == MeasureSpec.AT_MOST){
-            setMeasuredDimension(200,heightSpecSize);
+            setMeasuredDimension(400,heightSpecSize);
         }else if(heightSpecMode == MeasureSpec.AT_MOST){
             setMeasuredDimension(widthSpecSize,200);
         }
@@ -84,6 +84,10 @@ public class CustomView extends View {
         int paddingRight = getPaddingRight();
         int paddingTop = getPaddingTop();
         int paddingBottom = getPaddingBottom();
+        int width = getWidth() - paddingLeft - paddingRight;
+        int height = getHeight() - paddingTop - paddingBottom;
+        int radius = Math.min(width,height) / 2;
+        canvas.drawCircle(width,height,radius,mPaint);
     }
 
 }

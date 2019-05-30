@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
 
@@ -64,10 +65,10 @@ public class HorizontalScrollViewEx extends ViewGroup {
                 int deltaX = x - mLastXIntercept;
                 int deltaY = y - mLastYIntercept;
                 //父view需要水平滑动 如果是水平方向的滑动，拦截处理自己的逻辑
-                if(Math.abs(deltaX)>Math.abs(deltaY)){
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
                     intercepted = true;
-                }else{
-                //事件分发下去交由子View自己处理
+                } else {
+                    //事件分发下去交由子View自己处理
                     intercepted = false;
                 }
                 break;
@@ -95,33 +96,69 @@ public class HorizontalScrollViewEx extends ViewGroup {
                 break;
             case MotionEvent.ACTION_MOVE:
                 int deltaX = x - mLastX;
-                int deltaY = y - mLastY;
-                scrollBy( - deltaX,0);
+                scrollBy(-deltaX, 0);
                 break;
             case MotionEvent.ACTION_UP:
                 int scrollX = getScrollX();
-                int scrollToChildIndex = scrollX/mChildWidth;
                 mVelocityTracker.computeCurrentVelocity(1000);
                 float xVelocity = mVelocityTracker.getXVelocity();
-                if(Math.abs(xVelocity) >= 50){
-                    mChildIndex = xVelocity > 0?mChildIndex -1:mChildIndex +1;
-                }else{
-                    mChildIndex = (scrollX + mChildWidth/2)/ mChildWidth;
+                if (Math.abs(xVelocity) >= 50) {
+                    mChildIndex = xVelocity > 0 ? mChildIndex - 1 : mChildIndex + 1;
+                } else {
+                    mChildIndex = (scrollX + mChildWidth / 2) / mChildWidth;
                 }
                 int dx = mChildIndex * mChildWidth - scrollX;
-                smoothScrollTo(dx,0);
-                mVelocityTracker.recycle();
+                smoothScrollTo(dx, 0);
                 mVelocityTracker.clear();
                 break;
         }
         mLastX = x;
         mLastY = y;
-        return super.onTouchEvent(ev);
+        return true;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int measureWidth = 0;
+        int measureHeight = 0;
+        final int childCount = getChildCount();
+        measureChildren(widthMeasureSpec, heightMeasureSpec);
+
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
+        if (childCount == 0) {
+            setMeasuredDimension(0, 0);
+        } else if (widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST) {
+            final View childView = getChildAt(0);
+            measureWidth = childView.getMeasuredWidth() * childCount;
+            measureHeight = childView.getMeasuredHeight();
+            setMeasuredDimension(measureWidth,measureHeight);
+        } else if (widthSpecMode == MeasureSpec.AT_MOST) {
+            final View childView = getChildAt(0);
+            measureWidth = childView.getMeasuredWidth() * childCount;
+            setMeasuredDimension(measureWidth,heightSpecSize);
+        } else if (heightSpecMode == MeasureSpec.AT_MOST) {
+            final View childView = getChildAt(0);
+            measureHeight = childView.getMeasuredHeight();
+            setMeasuredDimension(widthSpecSize, measureHeight);
+        }
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-
+        int childLeft = 0;
+        int count = getChildCount();
+        for (int i = 0; i < count; i++) {
+            final View child = getChildAt(i);
+            if (child.getVisibility() == View.VISIBLE) {
+                final int childWidth = child.getMeasuredWidth();
+                child.layout(childLeft, 0, childLeft + childWidth, child.getMeasuredHeight());
+                childLeft += childWidth;
+            }
+        }
     }
 
     @Override
@@ -135,9 +172,13 @@ public class HorizontalScrollViewEx extends ViewGroup {
     }
 
     public void smoothScrollTo(int destX, int destY) {
-        mScroller.startScroll(getScrollX(), 0, destX, destY,3000);
+        mScroller.startScroll(getScrollX(), 0, destX, destY, 3000);
         invalidate();
     }
 
-
+    @Override
+    protected void onDetachedFromWindow() {
+        mVelocityTracker.recycle();
+        super.onDetachedFromWindow();
+    }
 }

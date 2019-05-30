@@ -6,11 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".study.android.ViewActivity2">
 
-    <com.jzkj.shanpai.study.android.myview.CustomView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:layout_margin="20dp"
-        app:circle_color="#888888"/>
+    <com.jzkj.shanpai.study.android.myview.HorizontalScrollViewEx
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.jzkj.shanpai.study.android.myview.CustomView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:padding="20dp"
+            app:circle_color="#888888" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:text="test" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:text="test1" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:text="test2" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:text="test3" />
+    </com.jzkj.shanpai.study.android.myview.HorizontalScrollViewEx>
+
 
 </android.support.constraint.ConstraintLayout>

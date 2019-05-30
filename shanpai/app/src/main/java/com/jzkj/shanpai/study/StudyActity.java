@@ -2,7 +2,6 @@ package com.jzkj.shanpai.study;
 
 import android.app.Activity;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.net.Uri;
@@ -12,13 +11,12 @@ import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+
 import com.jzkj.shanpai.Book;
 import com.jzkj.shanpai.IMyAidlInterface;
 import com.jzkj.shanpai.R;
-import com.jzkj.shanpai.study.android.ProgressActivity;
-import com.jzkj.shanpai.study.android.ViewActivity;
-import com.jzkj.shanpai.study.android.ViewActivity3;
-import com.jzkj.shanpai.study.android.service.MyService;
+import com.jzkj.shanpai.study.android.ViewActivity2;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -47,7 +45,7 @@ public class StudyActity extends Activity implements ServiceConnection{
                 skipToActivity(this, DataStructeActivity.class);
                 break;
             case R.id.btn_android:
-                skipToActivity(this, ViewActivity3.class);
+                skipToActivity(this, AnimationActivity.class);
                 break;
             case R.id.btn_okhtt3:
                 break;

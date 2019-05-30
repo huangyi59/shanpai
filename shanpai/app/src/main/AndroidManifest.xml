@@ -112,7 +112,8 @@
 
         <activity android:name=".study.android.ViewActivity" />
         <activity android:name=".study.android.ViewActivity2" />
-        <activity android:name=".study.android.ViewActivity3"></activity>
+        <activity android:name=".study.android.ViewActivity3" />
+        <activity android:name=".study.AnimationActivity"></activity>
     </application>
 
 </manifest>
