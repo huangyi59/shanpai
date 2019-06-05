@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".study.DrawableActivity">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/drawable_bitmap"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="shappe_drawable"
+        android:background="@drawable/drawable_shape"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/drawable_layerlist2"/>
+
+    <ImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/drawable_levellist"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test_text"
+        android:gravity="center"
+        android:background="@drawable/drawable_transition"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="shappe_drawable"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_insert"/>
+
+    <TextView
+        android:id="@+id/tv_scale"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="shappe_drawable"
+        android:layout_gravity="center"
+        android:background="@drawable/drawable_scale"/>
+
+    <TextView
+        android:id="@+id/tv_drawable"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="shappe_drawable"
+        android:layout_gravity="center" />
+</LinearLayout>

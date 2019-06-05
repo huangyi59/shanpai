@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -16,6 +17,7 @@ import com.jzkj.shanpai.Book;
 import com.jzkj.shanpai.IMyAidlInterface;
 import com.jzkj.shanpai.R;
 import com.jzkj.shanpai.study.android.ViewActivity2;
+import com.jzkj.shanpai.study.android.ViewActivity3;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -45,7 +47,7 @@ public class StudyActity extends Activity implements ServiceConnection{
                 skipToActivity(this, DataStructeActivity.class);
                 break;
             case R.id.btn_android:
-                skipToActivity(this, AnimationActivity.class);
+                skipToActivity(this, ViewActivity2.class);
                 break;
             case R.id.btn_okhtt3:
                 break;

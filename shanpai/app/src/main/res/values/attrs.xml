@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
+    <declare-styleable name="Title_Layout">
+        <attr name="title_text" format="string"/>
+    </declare-styleable>
+
    <!-- 在xml中声明自定义属性集合 -->
     <declare-styleable name="CircleView">
         <attr name="circle_color" format="color"/>

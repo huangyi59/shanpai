@@ -24,6 +24,13 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <!-- 保持唤醒 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 系统权限
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> -->
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".MyApp"
@@ -113,7 +120,10 @@
         <activity android:name=".study.android.ViewActivity" />
         <activity android:name=".study.android.ViewActivity2" />
         <activity android:name=".study.android.ViewActivity3" />
-        <activity android:name=".study.AnimationActivity"></activity>
+        <activity android:name=".study.AnimationActivity" />
+        <activity android:name=".study.RemoteViewActivity" />
+        <activity android:name=".study.DrawableActivity" />
+        <activity android:name=".study.WindowActivity"></activity>
     </application>
 
 </manifest>

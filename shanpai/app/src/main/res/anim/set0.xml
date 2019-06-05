@@ -13,9 +13,15 @@
         android:toYScale="2"
         android:pivotY="50%"
         android:pivotX="50%"/>
+    <!-- 默认从左上角开始旋转 -->
     <rotate
         android:fromDegrees="0"
         android:toDegrees="360"
         android:pivotX="50%"
         android:pivotY="50%" />
+    <translate
+        android:fromXDelta="0"
+        android:toXDelta="300"
+        android:fromYDelta="0"
+        android:toYDelta="300"/>
 </set>

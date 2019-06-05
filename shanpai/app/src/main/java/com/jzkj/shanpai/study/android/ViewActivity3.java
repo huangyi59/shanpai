@@ -20,13 +20,20 @@ import com.jzkj.shanpai.R;
  * 补码 反码 + 1 称为补码
  * View的最终大小是在layout阶段确定的
  *
+ *  window view viewroot layoutparams drayingView
+ *  window是一个窗口的概念，抽象类，实际上是不存在的，以View的形式展现 底层呢，View又必须依靠Window才能显示
+ *  Activity是如何显示的 attach 创建Window子类PhoneWindow，设置CallBack监听，包含我们常用的方法 dispatchTouchEvent onTatchToWindow
+ *  在调用setWindowManager创建WindowManager的子类，WindowManagerImpl
+ *  setContentView的时候创建DecorView，将Id加入decorView中 ，回调onContentChange方法，DecorView被创建并初始化完毕
+ *  ActivityThread 调用handleResumeActivity - onResume -makeVisible getWindowManager.addView
+ *
  */
 public class ViewActivity3 extends AppCompatActivity {
     private static final String TAG = ViewActivity3.class.getSimpleName();
     private LinearLayout mLinearLayout;
     private RelativeLayout mRelativeLayout;
-    private TextView mTvTest;
     private ImageView mIvImage;
+    private ImageView mIvTest;
 
     private static final int MODE_SHIFT = 30;
     //最后一位为0代表正数 为1代表负数 高2代表SpecMode，低30代表SpecSize
@@ -41,20 +48,32 @@ public class ViewActivity3 extends AppCompatActivity {
         setContentView(R.layout.activity_view3);
         Log.e(TAG, "MODE_MASK:" + MODE_MASK + ",UNSPECIFIED:" + UNSPECIFIED +
                 ",EXACTLY:" + EXACTLY + ",AT_MOST:" + AT_MOST);
-        mTvTest = findViewById(R.id.tv_test);
         mIvImage = findViewById(R.id.iv_test);
-        RelativeLayout.MarginLayoutParams marginLayoutParams = (RelativeLayout.MarginLayoutParams) mTvTest.getLayoutParams();
+        mIvTest = findViewById(R.id.iv_test2);
+        RelativeLayout.MarginLayoutParams marginLayoutParams = (RelativeLayout.MarginLayoutParams) mIvImage.getLayoutParams();
         marginLayoutParams.leftMargin = 10;
         marginLayoutParams.rightMargin = 10;
         marginLayoutParams.topMargin = 10;
         marginLayoutParams.bottomMargin = 10;
-        mTvTest.setLayoutParams(marginLayoutParams);
+        marginLayoutParams.width = 40;
+        marginLayoutParams.height = 100;
+        mIvImage.setLayoutParams(marginLayoutParams);
 
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mIvImage.getLayoutParams();
-        layoutParams.leftMargin = 10;
-        layoutParams.rightMargin =10;
-        layoutParams.topMargin = 10;
-        layoutParams.bottomMargin = 10;
+
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mIvTest.getLayoutParams();
+        layoutParams.width = 600;
+        layoutParams.height = 700;
+        mIvTest.setLayoutParams(layoutParams);
+        testInvalidate();
+    }
+
+    private void testInvalidate(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mIvImage.invalidate();
+            }
+        }).start();
     }
 
 }

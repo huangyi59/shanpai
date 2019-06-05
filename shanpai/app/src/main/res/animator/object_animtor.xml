@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- startOffset 表示动画的延迟时间，当动画开始后，需要延迟多少毫秒才能真正播放此动画 -->
+    <objectAnimator
+        android:repeatCount="1"
+        android:repeatMode="restart"
+        android:valueFrom="0"
+        android:valueTo="100"
+        android:duration="100"
+        android:valueType="intType"
+        android:propertyName="translationX"/>
+</set>

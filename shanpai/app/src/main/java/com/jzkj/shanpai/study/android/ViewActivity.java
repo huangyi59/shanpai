@@ -48,6 +48,7 @@ import com.jzkj.shanpai.study.android.myview.ScroView;
  * <p/>
  *
  * 使用内部拦截法解决滑动冲突时，MOVE时间第一次会分发下去，当子view检测到MOVE事件分发下来后，会调用requestDisallowInterceptTouchEvent交由父控件处理
+ * requestDisllowInterceptTouchEvent Flag_disallow_intercept
  */
 public class ViewActivity extends AppCompatActivity implements View.OnClickListener {
 

@@ -25,9 +25,12 @@ import com.jzkj.shanpai.R;
  * <p>
  * View的测量其实就是对其宽高的测量 viewgroup（LinearLayout） -onmeasure measureChildren measure
  * <p>
- * layout过程确定View本身的位置，
+ * layout过程确定View本身的位置，调用setFrame方法确定四个顶点的位置 setChildFrame确定每个子View的位置
  *
  * draw负责将View画在屏幕上 1.绘制背景 2.绘制自己 3.绘制children 4.绘制装饰
+ *
+ * invalidate 不会调用onMeasure、onLayout方法 requestLayout会调用
+ *
  */
 public class ViewActivity2 extends AppCompatActivity {
 
@@ -79,4 +82,10 @@ public class ViewActivity2 extends AppCompatActivity {
         //    int height = mView.getMeasuredHeight();
         //}
     }
+
+    @Override
+    public void onContentChanged() {
+        super.onContentChanged();
+    }
+
 }
