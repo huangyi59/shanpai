@@ -15,6 +15,7 @@ import com.jzkj.shanpai.R;
 import com.jzkj.shanpai.study.android.myview.MyTextView;
 import com.jzkj.shanpai.study.android.myview.MyViewGroup;
 import com.jzkj.shanpai.study.android.myview.ScroView;
+import com.xpc.gloriousrecyclerview.GloriousRecyclerView;
 
 /**
  * android3.0后增加了x、y、translationX、translationY
@@ -57,6 +58,7 @@ public class ViewActivity extends AppCompatActivity implements View.OnClickListe
     private static final int FRAME_COUNT = 30;
     private static final int DELAYED_TIME = 33;
     private int mCount = 1;
+    private GloriousRecyclerView mView;
 
     private MyTextView mTextView;
     private ScroView mScroView;

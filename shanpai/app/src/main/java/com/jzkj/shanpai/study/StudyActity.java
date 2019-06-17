@@ -16,6 +16,7 @@ import android.view.View;
 import com.jzkj.shanpai.Book;
 import com.jzkj.shanpai.IMyAidlInterface;
 import com.jzkj.shanpai.R;
+import com.jzkj.shanpai.study.android.ViewActivity;
 import com.jzkj.shanpai.study.android.ViewActivity2;
 import com.jzkj.shanpai.study.android.ViewActivity3;
 
@@ -47,7 +48,7 @@ public class StudyActity extends Activity implements ServiceConnection{
                 skipToActivity(this, DataStructeActivity.class);
                 break;
             case R.id.btn_android:
-                skipToActivity(this, ViewActivity2.class);
+                skipToActivity(this, ViewActivity.class);
                 break;
             case R.id.btn_okhtt3:
                 break;

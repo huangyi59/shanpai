@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.jzkj.shanpai.R;
 
@@ -48,6 +50,7 @@ public class AboutActivity extends Activity {
 
     private final String DEFALUT_SAVE = "DEFAULT_SAVE";
     private final String TAG = AboutActivity.class.getSimpleName();
+    private TextView mTvTest;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +62,13 @@ public class AboutActivity extends Activity {
         String exceptionString = getExceptionString(savedInstanceState);
         //Log.e(TAG, exceptionString);
         Log.e(TAG, "----------------" + this.getTaskId());
+
+        mTvTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startIntent();
+            }
+        });
     }
 
     private void startIntent() {
@@ -66,8 +76,8 @@ public class AboutActivity extends Activity {
         intent.setClass(this, AboutActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //data的匹配规则
-        intent.setDataAndType(Uri.parse("http://abc"),"video/mpeg");
+        //data的匹配规则 URI mineType URI的默认值为content或则file
+        intent.setDataAndType(Uri.parse("file://"),"video/mpeg");
         startActivity(intent);
     }
 

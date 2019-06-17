@@ -55,5 +55,6 @@ dependencies {
     implementation rootProject.ext.dependencies.butterknife
     implementation 'com.jaeger.statusbarutil:library:1.4.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.xpc:gloriousrecyclerview:0.2.5@aar'
     annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
 }
