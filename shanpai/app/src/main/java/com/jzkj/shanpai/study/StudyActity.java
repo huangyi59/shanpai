@@ -3,6 +3,7 @@ package com.jzkj.shanpai.study;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -19,6 +20,8 @@ import com.jzkj.shanpai.R;
 import com.jzkj.shanpai.study.android.ViewActivity;
 import com.jzkj.shanpai.study.android.ViewActivity2;
 import com.jzkj.shanpai.study.android.ViewActivity3;
+
+import java.util.concurrent.ThreadFactory;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -48,7 +51,8 @@ public class StudyActity extends Activity implements ServiceConnection{
                 skipToActivity(this, DataStructeActivity.class);
                 break;
             case R.id.btn_android:
-                skipToActivity(this, ViewActivity.class);
+                Log.e("tag",Thread.currentThread().getName());
+                skipToActivity(this, MessageActivity.class);
                 break;
             case R.id.btn_okhtt3:
                 break;

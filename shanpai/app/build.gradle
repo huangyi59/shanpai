@@ -44,6 +44,10 @@ android {
     }
 }
 
+/**
+ * 3.4版本后 compile已经被api与implementation取代 implementtation可以起到隐藏依赖的作用 api支持依赖传递
+ *
+ */
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -55,6 +59,5 @@ dependencies {
     implementation rootProject.ext.dependencies.butterknife
     implementation 'com.jaeger.statusbarutil:library:1.4.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.xpc:gloriousrecyclerview:0.2.5@aar'
     annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
 }
