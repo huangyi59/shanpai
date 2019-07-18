@@ -1,8 +1,11 @@
 package com.jzkj.shanpai.study;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import com.jzkj.shanpai.R;
 import java.util.ArrayList;
@@ -27,13 +30,34 @@ public class DataStructeActivity extends Activity {
     ArrayList<String> list = new ArrayList<>();
     LinkedList<String> linkedList = new LinkedList<>();
 
+    private Button mBtnBack;
+    private Button mBtnSkip;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arithmetic);
         tvShow = findViewById(R.id.tv_show);
+        mBtnBack = findViewById(R.id.btn_back);
+        mBtnSkip = findViewById(R.id.btn_go);
         //dynamicArray();
         linkedList();
+        setOnclickListener();
+    }
+
+    private void setOnclickListener(){
+        mBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        mBtnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DataStructeActivity.this,BeautifulActivity.class));
+            }
+        });
     }
 
     /**

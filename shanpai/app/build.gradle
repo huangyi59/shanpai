@@ -60,4 +60,5 @@ dependencies {
     implementation 'com.jaeger.statusbarutil:library:1.4.0'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
+    implementation 'org.jetbrains:annotations-java5:15.0'
 }

@@ -26,11 +26,15 @@
         android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="闪拍"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".study.CacheActivity"></activity>
+        <activity
+            android:name=".study.BeautifulActivity"
+            android:label="@string/title_activity_beautiful"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".study.CacheActivity" />
         <activity android:name=".study.ThreadPoolActivity" />
         <activity android:name=".study.ThreadActivity" />
         <activity android:name=".study.MessageActivity" />
@@ -43,8 +47,6 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
-                <data android:mimeType="imgage/*" />
             </intent-filter>
         </activity> <!-- 引导页 -->
         <activity
@@ -64,7 +66,8 @@
             android:screenOrientation="portrait" /> <!-- ArithmeticActivity -->
         <activity
             android:name=".study.DataStructeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode="singleInstance"/>
         <!--
          AndroidActivity 当编译选项中minSdkVersion targetSdkVersion均低于13 此选项不会导致Activity重启
          taskAffinity属性需要配合singleTask 属性才会起作用

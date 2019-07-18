@@ -23,14 +23,14 @@ import java.io.ObjectOutputStream;
  * </p>
  *
  * <p>
- * Serializable JAVA提供,使用简单，开销大，序列化和反序列化的过程需要大量的IO操作，
+ * Serializable JAVA提供,使用简单，开销大，序列化和反序列化的过程需要大量的IO操作，serialVersionUID用来辅助序列化和反序列化过程
  * Parcelable是android自带的，Parcelable主要用在内存的序列化上，使用麻烦，效率高
  * </p>
  *
  * Binder是客服端和服务端进行通信的媒介
  * asInterface用于将服务端的Binder对象转换成客户端所需的AIDL接口类型的对象
  *
- * 客户端请求binder（挂起）,调用stup类中的代理类Proxy中对应的方法，transact-》Service调用onTrassact 传入 parcel _data parcel _reply (flag)默认为0 写入结果
+ * 客户端请求binder（挂起）,调用stub类中的代理类Proxy中对应的方法，transact-》Service调用onTrassact 传入 parcel _data parcel _reply (flag)默认为0 写入结果
  * 返回数据 唤醒Client
  *
  * 关于cache database/sharedpreference 在包名data/data/packagename/database
@@ -96,6 +96,8 @@ public class ProgressActivity extends AppCompatActivity {
         saveUser();
         UserS user = readUser();
         Log.e(TAG,user.toString());
+
+        Bundle bundle = new Bundle();
     }
 
     private void saveUser(){

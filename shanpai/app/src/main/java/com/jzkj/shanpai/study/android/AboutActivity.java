@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jzkj.shanpai.R;
+import com.jzkj.shanpai.study.ArithmeticActivity;
 
 /**
  * <p>
@@ -45,6 +46,8 @@ import com.jzkj.shanpai.R;
  *     4.0和5.0之间的版本 startActivityForReult目标Activity为singleTask onActivityResult会被提前调用
  * </p>
  *
+ * windowSoftInputMode ->EditText 在输入时如果有遮挡会自当将布局向上弹起
+ *
  */
 public class AboutActivity extends Activity {
 
@@ -55,7 +58,7 @@ public class AboutActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_arithmetic);
+        setContentView(R.layout.activity_about);
         /**
          * Activity正常启动 savedInstanceState = null 异常销毁 bundle不为空
          */
@@ -63,6 +66,7 @@ public class AboutActivity extends Activity {
         //Log.e(TAG, exceptionString);
         Log.e(TAG, "----------------" + this.getTaskId());
 
+        mTvTest = findViewById(R.id.tv_test);
         mTvTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,11 +76,11 @@ public class AboutActivity extends Activity {
     }
 
     private void startIntent() {
-        Intent intent = new Intent();
-        intent.setClass(this, AboutActivity.class);
+        Intent intent = new Intent("");
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //data的匹配规则 URI mineType URI的默认值为content或则file
+        intent.setData(null);
         intent.setDataAndType(Uri.parse("file://"),"video/mpeg");
         startActivity(intent);
     }

@@ -17,6 +17,7 @@ import android.view.View;
 import com.jzkj.shanpai.Book;
 import com.jzkj.shanpai.IMyAidlInterface;
 import com.jzkj.shanpai.R;
+import com.jzkj.shanpai.study.android.AboutActivity;
 import com.jzkj.shanpai.study.android.ViewActivity;
 import com.jzkj.shanpai.study.android.ViewActivity2;
 import com.jzkj.shanpai.study.android.ViewActivity3;
@@ -41,9 +42,12 @@ public class StudyActity extends Activity implements ServiceConnection{
 //        bindService(intent,this, Context.BIND_AUTO_CREATE);
     }
 
-    @OnClick({R.id.btn_arithmetic, R.id.btn_data_stucture, R.id.btn_android, R.id.btn_okhtt3, R.id.btn_retrofit, R.id.btn_rxjava, R.id.btn_glide})
+    @OnClick({R.id.btn_activity,R.id.btn_arithmetic, R.id.btn_data_stucture, R.id.btn_android, R.id.btn_okhtt3, R.id.btn_retrofit, R.id.btn_rxjava, R.id.btn_glide})
     void onClick(View view) {
         switch (view.getId()) {
+            case R.id.btn_activity:
+                skipToActivity(this, AboutActivity.class);
+                break;
             case R.id.btn_arithmetic:
                 skipToActivity(this, ArithmeticActivity.class);
                 break;
@@ -52,7 +56,7 @@ public class StudyActity extends Activity implements ServiceConnection{
                 break;
             case R.id.btn_android:
                 Log.e("tag",Thread.currentThread().getName());
-                skipToActivity(this, MessageActivity.class);
+                skipToActivity(this, BeautifulActivity.class);
                 break;
             case R.id.btn_okhtt3:
                 break;
@@ -103,6 +107,6 @@ public class StudyActity extends Activity implements ServiceConnection{
     protected void onDestroy() {
         super.onDestroy();
         //解除服务绑定
-        unbindService(this);
+        //unbindService(this);
     }
 }
