@@ -30,10 +30,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".study.android.ClassActivity"></activity>
         <activity
             android:name=".study.BeautifulActivity"
             android:label="@string/title_activity_beautiful"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".study.CacheActivity" />
         <activity android:name=".study.ThreadPoolActivity" />
         <activity android:name=".study.ThreadActivity" />
@@ -66,8 +67,8 @@
             android:screenOrientation="portrait" /> <!-- ArithmeticActivity -->
         <activity
             android:name=".study.DataStructeActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
         <!--
          AndroidActivity 当编译选项中minSdkVersion targetSdkVersion均低于13 此选项不会导致Activity重启
          taskAffinity属性需要配合singleTask 属性才会起作用

@@ -18,6 +18,7 @@ import com.jzkj.shanpai.Book;
 import com.jzkj.shanpai.IMyAidlInterface;
 import com.jzkj.shanpai.R;
 import com.jzkj.shanpai.study.android.AboutActivity;
+import com.jzkj.shanpai.study.android.ClassActivity;
 import com.jzkj.shanpai.study.android.ViewActivity;
 import com.jzkj.shanpai.study.android.ViewActivity2;
 import com.jzkj.shanpai.study.android.ViewActivity3;
@@ -52,7 +53,7 @@ public class StudyActity extends Activity implements ServiceConnection{
                 skipToActivity(this, ArithmeticActivity.class);
                 break;
             case R.id.btn_data_stucture:
-                skipToActivity(this, DataStructeActivity.class);
+                skipToActivity(this, ClassActivity.class);
                 break;
             case R.id.btn_android:
                 Log.e("tag",Thread.currentThread().getName());
