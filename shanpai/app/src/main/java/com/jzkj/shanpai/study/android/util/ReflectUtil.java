@@ -15,7 +15,7 @@ public class ReflectUtil {
     //创建对象
     public static void reflectNewInstance(){
         try {
-            Class<?> classBook = Class.forName(Book.class.getName());
+            Class classBook = Class.forName(Book.class.getName());
             Object objectBook = classBook.newInstance();
             Book book = (Book) objectBook;
             book.setName("Android开发艺术探索");

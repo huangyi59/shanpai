@@ -17,6 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Ref;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,10 +34,15 @@ import java.util.List;
  * 在你创建参数化类型的一个实例时，编译器会为你负责转型操作，并且保证类型的正确性 编译期确保类型安全
  *
  * 泛型与其他的类型差不多 不确切的类型
+ * Java泛型是使用擦除来实现的，这意味着当你在使用泛型时，任何具体的类型信息都被擦除了 擦除移除了类型信息
+ * 由于泛型的擦除，泛型不能用于显示地引用运行时类型的操作之中，列入instanceof new 转型
+ *
+ * new T()的尝试将无法实现，部分原因是因为擦除,另一部分原因是因为编译器不能验证T具有默认构造
  *
  */
 public class ClassActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = ClassActivity.class.getName();
     private List<Class<? extends Activity>> mList;
     private Class[] classes = {ClassActivity.class,AppCompatActivity.class,Activity.class};
 
@@ -61,6 +67,9 @@ public class ClassActivity extends AppCompatActivity implements View.OnClickList
             //类型推断只对赋值操作有效
             testGeneric(0);
             testGeneric("");
+
+            List<String> list = new ArrayList<>();
+            Log.e(TAG, Arrays.toString(list.getClass().getTypeParameters()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,7 +81,7 @@ public class ClassActivity extends AppCompatActivity implements View.OnClickList
 
     private void test(){
         Class intClass = int.class;
-        Class<Integer> genericInClass = int.class;
+        Class genericInClass = Integer.TYPE;
 
         //向下转型是安全的 向上转型是不安全
         Building building = new House();

@@ -30,7 +30,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".study.android.ClassActivity"></activity>
+        <activity android:name=".study.AnnotationActivity"></activity>
+        <activity android:name=".study.android.ClassActivity" />
         <activity
             android:name=".study.BeautifulActivity"
             android:label="@string/title_activity_beautiful"
@@ -41,7 +42,7 @@
         <activity android:name=".study.MessageActivity" />
         <activity android:name=".study.StartActivity" /> <!-- 入口 -->
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".study.StartActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>

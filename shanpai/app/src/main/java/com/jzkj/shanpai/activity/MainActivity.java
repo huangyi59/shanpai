@@ -127,7 +127,7 @@ public class MainActivity extends Activity {
      * 进入首页
      */
     private void goHomePage() {
-        ActivitySkipUtil.goActivity(this, StudyActity.class);
+        ActivitySkipUtil.goActivity(this, HomeActivity.class);
         overridePendingTransition(R.anim.common_anim_splash_in, R.anim.common_anim_splash_out);
         finish();
     }
