@@ -13,10 +13,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 拨打电话 -->
     <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 保持唤醒 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!--
- 系统权限
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    -->
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -40,7 +37,6 @@
         <activity android:name=".study.ThreadPoolActivity" />
         <activity android:name=".study.ThreadActivity" />
         <activity android:name=".study.MessageActivity" />
-        <activity android:name=".study.StartActivity" /> <!-- 入口 -->
         <activity
             android:name=".study.StartActivity"
             android:launchMode="singleTask"
@@ -50,7 +46,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 引导页 -->
+        </activity>
         <activity
             android:name=".activity.GuideActivity"
             android:screenOrientation="portrait" /> <!-- 登录页 -->
@@ -71,9 +67,9 @@
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
         <!--
-         AndroidActivity 当编译选项中minSdkVersion targetSdkVersion均低于13 此选项不会导致Activity重启
-         taskAffinity属性需要配合singleTask 属性才会起作用
-        -->
+             AndroidActivity 当编译选项中minSdkVersion targetSdkVersion均低于13 此选项不会导致Activity重启
+             taskAffinity属性需要配合singleTask 属性才会起作用
+            -->
         <activity android:name=".study.android.AboutActivity">
             <intent-filter>
 
