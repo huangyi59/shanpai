@@ -38,7 +38,7 @@
         <activity android:name=".study.ThreadActivity" />
         <activity android:name=".study.MessageActivity" />
         <activity
-            android:name=".study.StartActivity"
+            android:name=".study.StudyActity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -56,9 +56,6 @@
         <activity
             android:name=".activity.home.activity.HomeActivity"
             android:screenOrientation="portrait" /> <!-- studyActivity -->
-        <activity
-            android:name=".study.StudyActity"
-            android:screenOrientation="portrait" /> <!-- ArithmeticActivity -->
         <activity
             android:name=".study.ArithmeticActivity"
             android:screenOrientation="portrait" /> <!-- ArithmeticActivity -->
@@ -101,6 +98,7 @@
         <activity android:name=".study.RemoteViewActivity" />
         <activity android:name=".study.DrawableActivity" />
         <activity android:name=".study.WindowActivity" />
+        <activity android:name=".study.Retrofit2Activity" />
     </application>
 
 </manifest>
