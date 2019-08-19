@@ -13,7 +13,7 @@ public class RetrofitUtil {
             .baseUrl("")
             .client(new OkHttpClient())
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            //.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build();
 
 }

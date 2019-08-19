@@ -12,9 +12,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 拨打电话 -->
     <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 保持唤醒 -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -27,7 +25,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".study.AnnotationActivity"></activity>
+        <activity
+            android:name=".study.Dagger2Activity"
+            android:label="@string/title_activity_dagger2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".study.AnnotationActivity" />
         <activity android:name=".study.android.ClassActivity" />
         <activity
             android:name=".study.BeautifulActivity"
@@ -66,7 +68,7 @@
         <!--
              AndroidActivity 当编译选项中minSdkVersion targetSdkVersion均低于13 此选项不会导致Activity重启
              taskAffinity属性需要配合singleTask 属性才会起作用
-            -->
+        -->
         <activity android:name=".study.android.AboutActivity">
             <intent-filter>
 

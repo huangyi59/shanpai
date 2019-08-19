@@ -30,5 +30,6 @@
         completions."
     </string>
     <string name="title_activity_beautiful">BeautifulActivity</string>
+    <string name="title_activity_dagger2">Dagger2Activity</string>
 
 </resources>
