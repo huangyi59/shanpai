@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.jzkj.shanpai.R;
 import java.util.ArrayDeque;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * 创建AsyncTask WorkerRunnable（instance of CallBack）FutureTask(Runnalble)
@@ -17,6 +18,7 @@ import java.util.concurrent.Executor;
 public class ThreadActivity extends AppCompatActivity {
 
     private Executor mExecutor = new SerialExecutor();
+    ThreadPoolExecutor mThreadPoolExecutor;
     int j = 0;
 
     @Override

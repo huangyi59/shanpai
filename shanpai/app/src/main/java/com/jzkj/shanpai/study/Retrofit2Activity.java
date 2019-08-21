@@ -96,7 +96,7 @@ public class Retrofit2Activity extends AppCompatActivity {
 
 
     private void test1() {
-        //Observable 抽象类 subscribeActual（）抽象方法
+        //Observable 抽象类 implements ObserbleSource subcribe subscribeActual（）抽象方法
         //ObservableOnSubscribe(可观察订阅) 接口 subscribe(ObservableEmitter<T> e) 发射器
         //ObservableCreate final类 Observable的子类
         //被观察者 发射器

@@ -16,7 +16,8 @@ import com.jzkj.shanpai.R;
  * 如果加锁机制，逻辑变得复杂，控件访问效率降低
  * 所以采用高效的单线程进行访问
  * <p>
- *  当某些数据以线程为作用域，不同的数据具有不同的数据副本的时候
+ * 1个线程对应一个Looper对象
+ * 当某些数据以线程为作用域，不同的数据具有不同的数据副本的时候
  * ThreadLocal 通过操作本地的table数组（Entry extends WeakReference<ThreadLocal<T>>）new Entry(ThreadLoack<Looper> key,value = Looper )
  * get - ThreadLocalMap
  * 根据指定的线程来存储数据
@@ -75,6 +76,7 @@ public class MessageActivity extends AppCompatActivity {
                 Log.e("TAG", "子线程收到消息了：" + msg.what + "-------");
             }
         };
+        handler2.sendEmptyMessage(1);
         handler2.post(new Runnable() {
             @Override
             public void run() {

@@ -83,9 +83,4 @@ public class ViewActivity2 extends AppCompatActivity {
         //}
     }
 
-    @Override
-    public void onContentChanged() {
-        super.onContentChanged();
-    }
-
 }
