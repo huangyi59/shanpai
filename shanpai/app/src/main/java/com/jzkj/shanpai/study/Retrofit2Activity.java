@@ -45,20 +45,11 @@ import retrofit2.Retrofit;
 
 /**
  * Chain.process(request) ->Intercept.intercept(chain) chain.process ->Intercept.intercept(chain)
- *
+ * <p>
  * Type是java编程语言中所有类型的公共高级接口，他们包括原始类型、参数化类型、数组类型、类型变量和基本类型
  * <p>
- * Observable被观察者 抽象类 常用实现者 LamdaObserable ObserablFromArray ObserableCreate
- * Observe 接口
- * suscibe 订阅方法 调用 scribleArtual抽象方法在子类实现调用
- * ObserableEmitter
- * 操作符 just（ObserableFromArray） flatMap（）
- * RxJava基于事件流的异步操作库
- * flatMap将一个发送事件的上游Observable变换为多个发送事件的Observables
- * RXJAVA的好处是帮我处理线程之间的切换，我们可以指定，订阅在那个线程，观察在那个线程
- * <p>
- * 边界使得你可以在用于泛型参数上设置限制条件
- * <?>无界通配符看起来以为着任何事物
+ * 创建操作符 crate just fromIterable fromArray range timer interval intervalRange
+ * 转换操作符
  */
 public class Retrofit2Activity extends AppCompatActivity {
 
@@ -73,10 +64,12 @@ public class Retrofit2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retrofit2);
         ButterKnife.bind(this);
-        test1();
+        //test1();
+        //test2();
         //test4();
-        test5();
+        //test5();
         //test6();
+        //test7();
     }
 
     private void test() throws IOException {
@@ -139,7 +132,6 @@ public class Retrofit2Activity extends AppCompatActivity {
                         Log.e(TAG, "onComplete");
                     }
                 });
-
     }
 
     private void test2() {
@@ -147,105 +139,138 @@ public class Retrofit2Activity extends AppCompatActivity {
         Observable.just(1, 2, 3)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Integer>() {
+                .subscribe(new Consumer<Integer>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(Integer integer) {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
+                    public void accept(Integer integer) throws Exception {
 
                     }
                 });
     }
 
     private void test3() {
-        Observable.just(1, 4, 5)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .filter(new Predicate<Integer>() {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            list.add(String.valueOf(i));
+        }
+        Observable
+                .fromIterable(list)
+                .subscribe(new Consumer<String>() {
                     @Override
-                    public boolean test(Integer integer) throws Exception {
-                        return integer > 4;
-                    }
-                })
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
+                    public void accept(String s) throws Exception {
+                        Log.e(TAG, "accept" + s);
                     }
                 });
     }
 
     private void test4() {
+        Observable
+                .timer(1, TimeUnit.SECONDS)
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        Log.e(TAG, "accept" + aLong);
+                    }
+                });
+    }
+
+    private void test5() {
+        Observable
+                .interval(1, TimeUnit.SECONDS)
+                .subscribe(new Observer<Long>() {
+                    Disposable disposable;
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.e(TAG, "onSubscribe");
+                        disposable = d;
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+                        Log.e(TAG, "onNext" + aLong);
+                        if (aLong == 5) {
+                            disposable.dispose();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "onComplete");
+                    }
+                });
+    }
+
+    private void test6() {
+        Observable.intervalRange(2, 10, 5, 1, TimeUnit.SECONDS)
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        Log.e(TAG, "accept" + aLong);
+                    }
+                });
+    }
+
+    private void test7() {
+        // Observable ->A Observable ->B
         Observable.create(new ObservableOnSubscribe<Integer>() {
 
             @Override
             public void subscribe(ObservableEmitter<Integer> e) throws Exception {
                 e.onNext(1);
-                e.onNext(2);
                 e.onComplete();
             }
-        }).flatMap(new Function<Integer, ObservableSource<String>>() {
+        }).map(new Function<Integer, String>() {
             @Override
-            public ObservableSource<String> apply(Integer integer) throws Exception {
-                return response(integer);
+            public String apply(Integer integer) throws Exception {
+                return integer + "";
             }
         }).subscribe(new Consumer<String>() {
             @Override
-            public void accept(String s) throws Exception {
-                Log.e(TAG, s);
+            public void accept(String o) throws Exception {
+                Log.e(TAG, "accept" + o);
             }
         });
     }
 
-    private void test5() {
-        Observable
-                .just("1")
-                .map(new Function<String, Integer>() {
-                    @Override
-                    public Integer apply(String s) throws Exception {
-                        return 1;
-                    }
-                }).subscribe(new Consumer<Integer>() {
-            @Override
-            public void accept(Integer integer) throws Exception {
-                Log.e(TAG, integer + "秒----------------------");
-            }
-        });
-    }
+    private void test8(){
+        //只有subscribe 调用了 ，才能调用发射器
+        Observable.create(new ObservableOnSubscribe<Integer>() {
 
-    private void test6() {
-        Observable.just(5, 4, 3, 2, 1, 0)
-                //.subscribeOn(Schedulers.io())
-                //.observeOn(AndroidSchedulers.mainThread())
-                .delay(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        Thread thread = Thread.currentThread();
-                        Log.e(TAG, integer + "秒" + thread.getName());
-                    }
-                });
-    }
-
-    private Observable<String> response(Integer integer) {
-        return Observable.create(new ObservableOnSubscribe<String>() {
             @Override
-            public void subscribe(ObservableEmitter<String> e) throws Exception {
-                e.onNext("1");
-                e.onNext("2");
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                e.onNext(1);
                 e.onComplete();
+            }
+        }).flatMap(new Function<Integer, ObservableSource<String>>() {
+
+            @Override
+            public ObservableSource<String> apply(Integer o) throws Exception {
+                return null;
+            }
+        }).subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
             }
         });
     }
