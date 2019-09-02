@@ -53,7 +53,7 @@ public class StudyActity extends Activity implements ServiceConnection{
                 skipToActivity(this, ArithmeticActivity.class);
                 break;
             case R.id.btn_data_stucture:
-                skipToActivity(this, MessageActivity.class);
+                skipToActivity(this, AnimationActivity.class);
                 break;
             case R.id.btn_android:
                 Log.e("tag",Thread.currentThread().getName());

@@ -89,7 +89,7 @@ public class AnimationActivity extends AppCompatActivity {
         }
     }
 
-    private void testLaoutAnimal(){
+    private void testLayoutAnimal(){
        Animation animation = AnimationUtils.loadAnimation(this,R.anim.set0);
        LayoutAnimationController controller = new LayoutAnimationController(animation);
        controller.setDelay(0.5f);//子View间隔150ms

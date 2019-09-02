@@ -14,7 +14,6 @@ import com.jzkj.shanpai.fragment.home.category.CategoryFragment;
 import com.jzkj.shanpai.fragment.home.contract.HomeContract;
 import com.jzkj.shanpai.fragment.home.modle.HomeModle;
 import com.jzkj.shanpai.fragment.home.presenter.HomePersenter;
-import com.jzkj.shanpai.widget.MyView;
 import com.jzkj.shanpai.widget.tablayout.TabLayout;
 
 import java.util.ArrayList;

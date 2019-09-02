@@ -25,10 +25,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".study.CustomeActivity"></activity>
         <activity
             android:name=".study.Dagger2Activity"
             android:label="@string/title_activity_dagger2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".study.AnnotationActivity" />
         <activity android:name=".study.android.ClassActivity" />
         <activity

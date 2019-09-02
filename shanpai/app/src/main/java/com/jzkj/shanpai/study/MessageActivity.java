@@ -64,6 +64,7 @@ public class MessageActivity extends AppCompatActivity {
         // 一个Message只能被发送一次 每个Message绑定一个Handler enqueueMessage将Handler与Message进行绑定
         // post系列方法，构建一个带r的的Message对象
         // if( msg.callBack!=null) handlerCallBack(msg.callBack.run()) else if(mCallBack!=null){ mCallBack.handleMessage(msg)}
+        // 同一个ThreadLocal 不同的下标 localThreadHashCode & 0x1111
         Message message = Message.obtain();
         message.what = 0;
         handler1.sendMessage(message);
