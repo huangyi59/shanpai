@@ -4,9 +4,14 @@ public class Book {
     private static final String TAG = Book.class.getName();
     private String name;
     private String author;
+    private int number;
 
     public Book(){
 
+    }
+
+    public Book(int number) {
+        this.number = number;
     }
 
     public Book(String name, String author) {
@@ -51,6 +56,20 @@ public class Book {
         return "Book{" +
                 "name='" + name + '\'' +
                 ", author='" + author + '\'' +
+                ", number=" + number +
                 '}';
+    }
+
+    // hashCode相同代表着这两个元素将存在数组中的相同的位置
+    // 默认使用对象的地址计算
+    @Override
+    public int hashCode() {
+        return 1;
+    }
+
+    //HashMap使用equals方法比较key是否相同 只能比较相同下标位置LinkedList中的元素
+    @Override
+    public boolean equals(Object obj) {
+        return this.number == ((Book)obj).number;
     }
 }

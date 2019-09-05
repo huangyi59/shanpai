@@ -4,11 +4,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.jzkj.shanpai.R;
+import com.jzkj.shanpai.study.android.bean.Book;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
 
 import sp.base.utils.LogUtil;
 
@@ -18,19 +27,123 @@ import sp.base.utils.LogUtil;
  * 时间复杂度：一个算法中的语句执行次数称为语句频度或时间频度。记为T(n)
  * 空间复杂度：一个算法的空间复杂度(Space Complexity)S(n)定义为该算法所耗费的存储空间
  * 虚拟机栈 每一个方法都会创建一个栈帧 对应方法的出和入 局部变量表（基本数据类型，引用或则句柄） 方法的出入口 动态链接 操作数栈
+ * <p>
+ * ArrayList的扩容 grow方法，Arrays.copyOf Sytem.arraycopy
+ * 1 2
+ * 1 2
  */
 public class ArithmeticActivity extends Activity {
-
+    private static final String TAG = ArithmeticActivity.class.getSimpleName();
 
     private TextView tvShow;
-
+    private ArrayList<String> mList;
+    //双向列表
+    private LinkedList<String> mLinkedList;
+    private HashMap<String, String> mHashMap = new HashMap<String, String>();
+    private HashMap<Book, String> mHashMap1 = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arithmetic);
         tvShow = findViewById(R.id.tv_show);
-        sort();
+        //sort();
+        testHashMap();
+    }
+
+    /**
+     * 1.HashMap使用equals判断key是否与表中的key相等
+     * 2.equals 默认比较对象的地址
+     * 3.利用hashCode值进行运算生成数组的下标
+     */
+    private void testHashMap() {
+        String a = new String("abc");
+        String b = new String("abc");
+        mHashMap.put(a, "1");
+        mHashMap.put(b, "2");
+        Log.e(TAG, mHashMap.toString());
+
+        Book book = new Book(1);
+        Book book1 = new Book(1);
+        mHashMap1.put(book, "abc");
+        mHashMap1.put(book1, "abc");
+        Log.e(TAG, mHashMap1.toString() + "--" + book.hashCode() + "--" + book1.hashCode());
+    }
+
+    /**
+     * 访问ArrayList优于LinkedList 添加LinkedList由于ArrayList
+     */
+    private void testList() {
+        //基于动态数组
+        mList = new ArrayList();
+        //默认大小10 oldCapcitya = oldCapcitya + (oldCapcitya >> 1)
+        mList.add("0");
+        String a = mList.get(0);
+        mList.remove("");
+
+        //基于链表
+        mLinkedList = new LinkedList<>();
+        //直接在末尾将last.next -> E
+        mLinkedList.add("0");
+        mLinkedList.get(0);
+        mLinkedList.remove();
+    }
+
+    /**
+     * 二叉树的遍历 从左到右 广度优先
+     */
+    private void testTreeNode1(TreeNode<String> root) {
+        if (root == null)
+            return;
+
+        List<String> list = new ArrayList<>();
+        Queue<TreeNode<String>> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode<String> treeNode = queue.poll();
+            if (treeNode.left != null) {
+                queue.offer(treeNode.left);
+            }
+            if (treeNode.right != null) {
+                queue.offer(treeNode.right);
+            }
+            list.add(treeNode.item);
+        }
+    }
+
+    /**
+     * 二叉树的遍历 从上到下 深度优先
+     */
+    private void testTreeNode2(TreeNode<String> root) {
+        if (root == null)
+            return;
+
+        List<String> list = new ArrayList<>();
+        Stack<TreeNode<String>> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode<String> treeNode = stack.pop();
+            if (treeNode.right != null) {
+                stack.push(treeNode.right);
+            }
+            if (treeNode.left != null) {
+                stack.push(treeNode.left);
+            }
+            list.add(treeNode.item);
+        }
+    }
+
+    /**
+     * 二叉树的数据结构
+     */
+    static class TreeNode<E> {
+        E item;
+        TreeNode left;
+        TreeNode right;
+
+        public TreeNode(E item) {
+            this.item = item;
+        }
     }
 
     private void sort() {
@@ -55,10 +168,10 @@ public class ArithmeticActivity extends Activity {
         tvShow.setText(sb.toString());
     }
 
-    public void mergeSort(int arr[]){
+    public void mergeSort(int arr[]) {
         //在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间
         int temp[] = new int[arr.length];
-        Sort(arr,0,arr.length-1,temp);
+        Sort(arr, 0, arr.length - 1, temp);
     }
 
     /**
@@ -76,9 +189,9 @@ public class ArithmeticActivity extends Activity {
 
         //Integer.MAX_VALUE 0x7fffffff 0111 + 28个1 2^31 - 1
         int mid = left + (right - left) / 2;
-        Sort(arr,left,mid,temp);//左边归并排序，使得左子序列有序
-        Sort(arr,mid + 1,right,temp);//右边归并排序，使得右子序列有序
-        merge(arr,left,mid,right,temp);//将两个有序子数组合并操作
+        Sort(arr, left, mid, temp);//左边归并排序，使得左子序列有序
+        Sort(arr, mid + 1, right, temp);//右边归并排序，使得右子序列有序
+        merge(arr, left, mid, right, temp);//将两个有序子数组合并操作
     }
 
     private void merge(int[] arr, int left, int mid, int right, int[] temp) {
@@ -211,6 +324,5 @@ public class ArithmeticActivity extends Activity {
         arr[a] = arr[b];
         arr[b] = temp;
     }
-
 
 }
