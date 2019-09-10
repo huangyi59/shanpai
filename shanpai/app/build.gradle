@@ -45,7 +45,7 @@ android {
 }
 
 /**
- * 3.4版本后 compile已经被api与implementation取代 implementtation可以起到隐藏依赖的作用 api支持依赖传递
+ * 3.4版本后 compile已经被api与implementation取代 implementation可以起到隐藏依赖的作用 api支持依赖传递 compile支持依赖传递
  *
  */
 dependencies {

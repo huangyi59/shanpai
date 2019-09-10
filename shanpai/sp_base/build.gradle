@@ -4,8 +4,6 @@ android {
     compileSdkVersion 28
     buildToolsVersion rootProject.ext.android.buildToolsVersion
 
-
-
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
@@ -28,7 +26,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation rootProject.ext.dependencies.glide
-    implementation rootProject.ext.dependencies.butterknife
+    api rootProject.ext.dependencies.glide
+    api rootProject.ext.dependencies.butterknife
     annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
 }

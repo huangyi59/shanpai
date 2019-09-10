@@ -57,6 +57,7 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     private void test1() {
+        // 当前线程的全局变量ThreadLocalMap ->Entry(T values)
         Looper.prepare();
         Looper.myLooper();
         // Looper.prepare(); Looper.prepareMainLooper(); One Looper may be created per Thread

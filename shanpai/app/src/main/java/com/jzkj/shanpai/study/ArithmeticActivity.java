@@ -1,12 +1,8 @@
 package com.jzkj.shanpai.study;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.jzkj.shanpai.R;
@@ -18,6 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.concurrent.ConcurrentHashMap;
 
 import sp.base.utils.LogUtil;
 
@@ -36,11 +33,6 @@ public class ArithmeticActivity extends Activity {
     private static final String TAG = ArithmeticActivity.class.getSimpleName();
 
     private TextView tvShow;
-    private ArrayList<String> mList;
-    //双向列表
-    private LinkedList<String> mLinkedList;
-    private HashMap<String, String> mHashMap = new HashMap<String, String>();
-    private HashMap<Book, String> mHashMap1 = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,173 +40,58 @@ public class ArithmeticActivity extends Activity {
         setContentView(R.layout.activity_arithmetic);
         tvShow = findViewById(R.id.tv_show);
         //sort();
-        testHashMap();
     }
 
-    /**
-     * 1.HashMap使用equals判断key是否与表中的key相等
-     * 2.equals 默认比较对象的地址
-     * 3.利用hashCode值进行运算生成数组的下标
-     */
-    private void testHashMap() {
-        String a = new String("abc");
-        String b = new String("abc");
-        mHashMap.put(a, "1");
-        mHashMap.put(b, "2");
-        Log.e(TAG, mHashMap.toString());
 
-        Book book = new Book(1);
-        Book book1 = new Book(1);
-        mHashMap1.put(book, "abc");
-        mHashMap1.put(book1, "abc");
-        Log.e(TAG, mHashMap1.toString() + "--" + book.hashCode() + "--" + book1.hashCode());
-    }
-
-    /**
-     * 访问ArrayList优于LinkedList 添加LinkedList由于ArrayList
-     */
-    private void testList() {
-        //基于动态数组
-        mList = new ArrayList();
-        //默认大小10 oldCapcitya = oldCapcitya + (oldCapcitya >> 1)
-        mList.add("0");
-        String a = mList.get(0);
-        mList.remove("");
-
-        //基于链表
-        mLinkedList = new LinkedList<>();
-        //直接在末尾将last.next -> E
-        mLinkedList.add("0");
-        mLinkedList.get(0);
-        mLinkedList.remove();
-    }
-
-    /**
-     * 二叉树的遍历 从左到右 广度优先
-     */
-    private void testTreeNode1(TreeNode<String> root) {
-        if (root == null)
-            return;
-
-        List<String> list = new ArrayList<>();
-        Queue<TreeNode<String>> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            TreeNode<String> treeNode = queue.poll();
-            if (treeNode.left != null) {
-                queue.offer(treeNode.left);
-            }
-            if (treeNode.right != null) {
-                queue.offer(treeNode.right);
-            }
-            list.add(treeNode.item);
-        }
-    }
-
-    /**
-     * 二叉树的遍历 从上到下 深度优先
-     */
-    private void testTreeNode2(TreeNode<String> root) {
-        if (root == null)
-            return;
-
-        List<String> list = new ArrayList<>();
-        Stack<TreeNode<String>> stack = new Stack<>();
-        stack.push(root);
-        while (!stack.isEmpty()) {
-            TreeNode<String> treeNode = stack.pop();
-            if (treeNode.right != null) {
-                stack.push(treeNode.right);
-            }
-            if (treeNode.left != null) {
-                stack.push(treeNode.left);
-            }
-            list.add(treeNode.item);
-        }
-    }
-
-    /**
-     * 二叉树的数据结构
-     */
-    static class TreeNode<E> {
-        E item;
-        TreeNode left;
-        TreeNode right;
-
-        public TreeNode(E item) {
-            this.item = item;
-        }
-    }
 
     private void sort() {
-        int array[] = {5, 4, 6, 3, 8, 7};
+        int array[] = {5, 3, 6, 4, 8, 7};
         //bubbleSort(array);
         //selectSort(array);
         //quickSort(array, 0, array.length - 1);
-        mergeSort(array);
+        //mergeSort(array);
         print(array);
         LogUtil.e("tag", binarySearch(array, 1, array.length) + "------");
     }
 
-    private void print(int[] array) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < array.length; i++) {
-            if (i != array.length - 1) {
-                sb.append(array[i]).append(",");
-            } else {
-                sb.append(array[i]);
+    /**
+     * 冒泡排序   比较相邻的两个元素，较大者放后面
+     * 时间复杂度 (n-1) + (n-2) + ... 2 + 1 等差数列求和Sn = n(a1+an)/2 = O(n*n/2) 最优情况是O(1)
+     * 空间复杂度 O(1)
+     * 稳定性：稳定
+     */
+    private void bubbleSort(int[] arr) {
+        boolean flag = false;
+        //外层循环控制排序趟数
+        for (int i = 0; i < arr.length - 1; i++) {
+            //内层循环控制每一趟排序多少次
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr, j, j + 1);
+                    flag = true;
+                }
             }
+            if (!flag) break;
         }
-        tvShow.setText(sb.toString());
-    }
-
-    public void mergeSort(int arr[]) {
-        //在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间
-        int temp[] = new int[arr.length];
-        Sort(arr, 0, arr.length - 1, temp);
     }
 
     /**
-     * 归并排序：该算法采用经典的分治（divide-and-conquer）策略（分治法将问题分(divide)成一些小的问题然后递归求解
-     * 时间复杂度：O(nlog(n))
-     * 空间复杂度：O(log(n)+n) -->递归的栈空间  每次递归都会释放掉所占的辅助空间
-     * 稳定性：稳定排序
+     * 选择排序  工作原理是每一次从待排序的数据元素中选出最小（或最大）的一个元素，存放在序列的起始位置
+     * 再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推
+     * 时间复杂度 (n-1) + (n-2) + ... 2 + 1 等差数列求和Sn = n(a1+an)/2 = O(n*n/2) 最优情况是O(n)
+     * 空间复杂度 O(1)
+     * 稳定性：稳定
      */
-    private void Sort(int arr[], int left, int right, int temp[]) {
-        if (arr == null) throw new NullPointerException("arr is null");
-
-        if (arr.length == 0) return;
-
-        if (left >= right) return;
-
-        //Integer.MAX_VALUE 0x7fffffff 0111 + 28个1 2^31 - 1
-        int mid = left + (right - left) / 2;
-        Sort(arr, left, mid, temp);//左边归并排序，使得左子序列有序
-        Sort(arr, mid + 1, right, temp);//右边归并排序，使得右子序列有序
-        merge(arr, left, mid, right, temp);//将两个有序子数组合并操作
-    }
-
-    private void merge(int[] arr, int left, int mid, int right, int[] temp) {
-        int i = left;//左序列指针
-        int j = mid + 1;//右序列指针
-        int t = 0;//临时数组指针
-        while (i <= mid && j <= right) {
-            if (arr[i] <= arr[j]) {
-                temp[t++] = arr[i++];
-            } else {
-                temp[t++] = arr[j++];
+    private void selectSort(int arr[]) {
+        for (int i = 0; i < arr.length; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] > arr[j]) {
+                    minIndex = j;
+                    //保证其稳定性
+                    if (i != minIndex) swap(arr, i, minIndex);
+                }
             }
-        }
-        while (i <= mid) {//将左边剩余元素填充进temp中
-            temp[t++] = arr[i++];
-        }
-        while (j <= right) {//将右序列剩余元素填充进temp中
-            temp[t++] = arr[j++];
-        }
-        t = 0;
-        //将temp中的元素全部拷贝到原数组中
-        while (left <= right) {
-            arr[left++] = temp[t++];
         }
     }
 
@@ -278,45 +155,66 @@ public class ArithmeticActivity extends Activity {
         return -1;
     }
 
-    /**
-     * 选择排序  工作原理是每一次从待排序的数据元素中选出最小（或最大）的一个元素，存放在序列的起始位置
-     * 再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推
-     * 时间复杂度 (n-1) + (n-2) + ... 2 + 1 等差数列求和Sn = n(a1+an)/2 = O(n*n/2) 最优情况是O(n)
-     * 空间复杂度 O(1)
-     * 稳定性：稳定
-     */
-    private void selectSort(int arr[]) {
-        for (int i = 0; i < arr.length - 1; i++) {
-            int minIndex = i;
-            for (int j = i + 1; j < arr.length; j++) {
-                if (arr[i] > arr[j]) {
-                    minIndex = j;
-                }
-            }
-            //保证其稳定性
-            if (i != minIndex) swap(arr, i, minIndex);
-        }
+    public void mergeSort(int arr[]) {
+        //在排序前，先建好一个长度等于原数组长度的临时数组，避免递归中频繁开辟空间
+        int temp[] = new int[arr.length];
+        Sort(arr, 0, arr.length - 1, temp);
     }
 
     /**
-     * 冒泡排序   比较相邻的两个元素，较大者放后面
-     * 时间复杂度 (n-1) + (n-2) + ... 2 + 1 等差数列求和Sn = n(a1+an)/2 = O(n*n/2) 最优情况是O(n*n)
-     * 空间复杂度 O(1)
-     * 稳定性：稳定
+     * 归并排序：该算法采用经典的分治（divide-and-conquer）策略（分治法将问题分(divide)成一些小的问题然后递归求解
+     * 时间复杂度：O(nlog(n))
+     * 空间复杂度：O(log(n)+n) -->递归的栈空间  每次递归都会释放掉所占的辅助空间
+     * 稳定性：稳定排序
      */
-    private void bubbleSort(int[] arr) {
-        boolean flag = false;
-        //外层循环控制排序趟数
-        for (int i = 0; i < arr.length - 1; i++) {
-            //内层循环控制每一趟排序多少次
-            for (int j = 0; j < arr.length - 1 - i; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    swap(arr, j, j + 1);
-                    flag = true;
-                }
+    private void Sort(int arr[], int left, int right, int temp[]) {
+        if (arr == null) throw new NullPointerException("arr is null");
+
+        if (arr.length == 0) return;
+
+        if (left >= right) return;
+
+        //Integer.MAX_VALUE 0x7fffffff 0111 + 28个1 2^31 - 1
+        int mid = left + (right - left) / 2;
+        Sort(arr, left, mid, temp);//左边归并排序，使得左子序列有序
+        Sort(arr, mid + 1, right, temp);//右边归并排序，使得右子序列有序
+        merge(arr, left, mid, right, temp);//将两个有序子数组合并操作
+    }
+
+    private void merge(int[] arr, int left, int mid, int right, int[] temp) {
+        int i = left;//左序列指针
+        int j = mid + 1;//右序列指针
+        int t = 0;//临时数组指针
+        while (i <= mid && j <= right) {
+            if (arr[i] <= arr[j]) {
+                temp[t++] = arr[i++];
+            } else {
+                temp[t++] = arr[j++];
             }
-            if (!flag) break;
         }
+        while (i <= mid) {//将左边剩余元素填充进temp中
+            temp[t++] = arr[i++];
+        }
+        while (j <= right) {//将右序列剩余元素填充进temp中
+            temp[t++] = arr[j++];
+        }
+        t = 0;
+        //将temp中的元素全部拷贝到原数组中
+        while (left <= right) {
+            arr[left++] = temp[t++];
+        }
+    }
+
+    private void print(int[] array) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < array.length; i++) {
+            if (i != array.length - 1) {
+                sb.append(array[i]).append(",");
+            } else {
+                sb.append(array[i]);
+            }
+        }
+        tvShow.setText(sb.toString());
     }
 
     private void swap(int[] arr, int a, int b) {
