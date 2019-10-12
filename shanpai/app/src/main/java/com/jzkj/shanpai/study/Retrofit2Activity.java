@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.jzkj.shanpai.R;
+import com.jzkj.shanpai.study.android.bean.A;
+import com.jzkj.shanpai.study.android.bean.B;
 import com.jzkj.shanpai.study.android.bean.JavaBean;
 import com.jzkj.shanpai.study.android.impl.AccessApiService;
 import com.jzkj.shanpai.util.RetrofitUtil;
@@ -15,6 +17,8 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +42,8 @@ import io.reactivex.internal.operators.observable.ObservableFromIterable;
 import io.reactivex.internal.schedulers.NewThreadWorker;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -72,7 +78,29 @@ public class Retrofit2Activity extends AppCompatActivity {
         //test7();
     }
 
-    private void test() throws IOException {
+    private void testOkHttp() throws IOException {
+        OkHttpClient client = new OkHttpClient.Builder().build();
+        Request request = new Request.Builder().url("").build();
+        okhttp3.Response responseExecute = client.newCall(request).execute();
+        if(!responseExecute.isSuccessful()){
+            return;
+        }
+
+        client.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+
+            }
+        });
+
+    }
+
+    private void testRetrofit() throws IOException {
         AccessApiService service = RetrofitUtil.retrofit.create(AccessApiService.class);
         service.getCall().enqueue(new Callback<JavaBean>() {
             @Override
@@ -86,7 +114,6 @@ public class Retrofit2Activity extends AppCompatActivity {
             }
         });
     }
-
 
     private void test1() {
         //Observable 抽象类 implements ObserbleSource subcribe subscribeActual（）抽象方法

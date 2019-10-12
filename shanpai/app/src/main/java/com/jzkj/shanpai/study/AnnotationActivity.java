@@ -33,4 +33,15 @@ public class AnnotationActivity extends AppCompatActivity {
         }
     }
 
+    private void test1(Object[] args){
+        Class clz = Object.class;
+        try {
+            Object object = clz.newInstance();
+            Method method = clz.getMethod("test1",String.class,Integer.class);
+            method.invoke(object,args);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

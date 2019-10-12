@@ -1,5 +1,7 @@
 package com.jzkj.shanpai.study;
 
+import android.app.IntentService;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +39,13 @@ public class ThreadActivity extends AppCompatActivity {
         @Override
         public Thread newThread(Runnable r) {
             return new Thread(r, "AsyncTask#" + mCount.getAndIncrement());
+        }
+    };
+
+    private IntentService mIntentService = new IntentService("") {
+        @Override
+        protected void onHandleIntent(Intent intent) {
+
         }
     };
 
@@ -99,7 +108,7 @@ public class ThreadActivity extends AppCompatActivity {
         protected Object doInBackground(String[] objects) {
             try {
                 Thread.sleep(2000);
-                publishProgress();
+                publishProgress(0);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -85,6 +85,13 @@ public class MessageActivity extends AppCompatActivity {
                 Log.e(TAG,3+"-----");
             }
         });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        },3000);
     }
 
 }

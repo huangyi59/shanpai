@@ -6,15 +6,8 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.jzkj.shanpai.R;
-import com.jzkj.shanpai.study.android.bean.Book;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Arrays;
 
 import sp.base.utils.LogUtil;
 
@@ -33,6 +26,9 @@ public class ArithmeticActivity extends Activity {
     private static final String TAG = ArithmeticActivity.class.getSimpleName();
 
     private TextView tvShow;
+    private int[] origin = {2, 1, 4, 3, 5, 6, 7, 8, 9, 10};
+    private int[] result = {5, 2, 3, 4};
+    private int[] remove = new int[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +36,25 @@ public class ArithmeticActivity extends Activity {
         setContentView(R.layout.activity_arithmetic);
         tvShow = findViewById(R.id.tv_show);
         //sort();
+
+        Log.e(TAG, "result:" + Arrays.toString(slectRemove(origin, result)));
     }
 
+    private int[] slectRemove(int[] origin, int[] result) {
+        int size = 0;
+        for (int i = 0; i < origin.length; i++) {
+            for (int j = 0; j < result.length; j++) {
+                //break 终止了本次循环，continue未终止本次循环，继续下一个判断条件
+                if (origin[i] == result[j])
+                    break;
 
+                if (origin[i] != result[j] && j == result.length - 1)
+                    remove[size++] = origin[i];
+            }
+        }
+
+        return remove;
+    }
 
     private void sort() {
         int array[] = {5, 3, 6, 4, 8, 7};

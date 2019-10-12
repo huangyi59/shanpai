@@ -1,1 +1,1 @@
-include ':app', ':shanpai_base', ':sp_base'
+include ':app', ':shanpai_base', ':sp_base', ':loginmodle', ':mymodle'

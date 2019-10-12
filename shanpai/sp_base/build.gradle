@@ -9,6 +9,13 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
+
     }
 
     buildTypes {
@@ -17,6 +24,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
 
 }
 
@@ -29,4 +38,7 @@ dependencies {
     api rootProject.ext.dependencies.glide
     api rootProject.ext.dependencies.butterknife
     annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
+
+    api 'com.alibaba:arouter-api:1.1.1'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
 }

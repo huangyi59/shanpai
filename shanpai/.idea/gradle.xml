@@ -9,6 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/loginmodle" />
+            <option value="$PROJECT_DIR$/mymodle" />
             <option value="$PROJECT_DIR$/shanpai_base" />
             <option value="$PROJECT_DIR$/sp_base" />
           </set>

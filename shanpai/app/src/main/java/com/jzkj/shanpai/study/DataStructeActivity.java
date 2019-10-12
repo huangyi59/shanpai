@@ -1,23 +1,30 @@
 package com.jzkj.shanpai.study;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
 import com.jzkj.shanpai.R;
 import com.jzkj.shanpai.study.android.bean.Book;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Set;
 import java.util.Stack;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -34,16 +41,30 @@ public class DataStructeActivity extends Activity {
     private static final String TAG = DataStructeActivity.class.getSimpleName();
 
     private TextView tvShow;
-    //Array是有序的，基于动态数组
-    ArrayList<String> list = new ArrayList<>();
 
+    //Array是有序的，基于动态数组
+    ArrayList<String> mList = new ArrayList<>();
     //双向列表
     private LinkedList<String> mLinkedList;
+
+    private TreeMap<String, String> mTreeMap = new TreeMap<>();
+    // HashMap是无序的 LinkedHashMap 记录插入顺序 访问顺序
     private HashMap<String, String> mHashMap = new HashMap<String, String>();
     private HashMap<Book, String> mHashMap1 = new HashMap<>();
+    private LinkedHashMap<String, String> mLinkedHashMap = new LinkedHashMap<>();
     private ConcurrentHashMap<String, String> concurrentHashMap = new ConcurrentHashMap<>();
-    private ArrayList<String> mList;
 
+    //内部使用HashMap实现的
+    private HashSet<String> mHashSet = new HashSet<>();
+    private LinkedHashSet<String> mLinkedHashSet = new LinkedHashSet<>();
+    private TreeSet<String> mTreeSet = new TreeSet<>();
+
+    //栈
+    private Stack<String> mStack = new Stack<String>();
+
+    //队列
+    private Queue<String> mQueue = new LinkedList<>();
+    private PriorityQueue<String> mPriortyQueue = new PriorityQueue<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,11 +73,28 @@ public class DataStructeActivity extends Activity {
         tvShow = findViewById(R.id.tv_show);
         //dynamicArray();
         initLinkedList();
-        testHashMap();
-        testTreeNode1(initTreeNode());
-        testTreeNode2(initTreeNode());
-        testTreeNode3(initTreeNode());
-        testTreeNode1(testTreeNode3(initTreeNode()));
+        testArray();
+
+        //testTreeNode1(initTreeNode());
+        //testTreeNode2(initTreeNode());
+        //testTreeNode3(initTreeNode());
+        //testTreeNode1(testTreeNode3(initTreeNode()));
+        //testTreeNode4(initTreeNode());
+        //testTreeNode5(initTreeNode());
+        //testTreeNode6(initTreeNode());
+
+        testMap();
+        testQueue();
+    }
+
+    private void testArray() {
+        int array[] = {1, 3, 2, 4, 5, 7, 9};
+        int arrayCopy[] = Arrays.copyOf(array, array.length * 2);
+        Log.e(TAG, Arrays.toString(arrayCopy));
+
+        int arrayCopy1[] = new int[10];
+        System.arraycopy(array, 0, arrayCopy1, 0, array.length);
+        Log.e(TAG, Arrays.toString(arrayCopy1));
     }
 
     /**
@@ -68,7 +106,7 @@ public class DataStructeActivity extends Activity {
         int arrC[] = Arrays.copyOf(arr, 8);
         tvShow.setText(Arrays.toString(arrC));
         //数组扩展
-        list.add("动态数组");
+        mList.add("动态数组");
     }
 
     /**
@@ -109,7 +147,10 @@ public class DataStructeActivity extends Activity {
     }
 
 
-    private void printLinkedList(Node<String> head){
+    /**
+     * 打印链表
+     */
+    private void printLinkedList(Node<String> head) {
         StringBuilder sb = new StringBuilder();
         while (head != null) {
             sb.append(head.item.toString() + ",");
@@ -128,7 +169,7 @@ public class DataStructeActivity extends Activity {
         }
     }
 
-    private TreeNode<String> initTreeNode(){
+    private TreeNode<String> initTreeNode() {
         TreeNode<String> treeNode = new TreeNode<>("A");
         treeNode.left = new TreeNode("B");
         treeNode.right = new TreeNode("C");
@@ -139,27 +180,6 @@ public class DataStructeActivity extends Activity {
         treeNode.right.left = new TreeNode("F");
         treeNode.right.right = new TreeNode("G");
         return treeNode;
-    }
-
-    /**
-     * 1.HashMap使用equals判断key是否与表中的key相等
-     * 2.equals 默认比较对象的地址
-     * 3.利用hashCode值进行运算生成数组的下标
-     */
-    private void testHashMap() {
-        String a = new String("abc");
-        String b = new String("abc");
-        mHashMap.put(a, "1");
-        mHashMap.put(b, "2");
-        Log.e(TAG, mHashMap.toString());
-
-        Book book = new Book(1);
-        Book book1 = new Book(1);
-        mHashMap1.put(book, "abc");
-        mHashMap1.put(book1, "abc");
-        Log.e(TAG, mHashMap1.toString() + "--" + book.hashCode() + "--" + book1.hashCode());
-
-        concurrentHashMap.put("1", "1");
     }
 
     /**
@@ -202,7 +222,7 @@ public class DataStructeActivity extends Activity {
             list.add(treeNode.item);
         }
 
-        Log.e(TAG,list.toString());
+        Log.e(TAG, list.toString());
     }
 
     /**
@@ -224,22 +244,22 @@ public class DataStructeActivity extends Activity {
                 stack.push(treeNode.left);
             }
             list.add(treeNode.item);
-        }
 
-        Log.e(TAG,list.toString());
+            Log.e(TAG, treeNode.item);
+        }
     }
 
     /**
      * 二叉树的翻转
      */
-    private TreeNode<String> testTreeNode3(TreeNode<String> root){
-        if(root == null)
+    private TreeNode<String> testTreeNode3(TreeNode<String> root) {
+        if (root == null)
             return null;
 
-        if(root.left != null){
+        if (root.left != null) {
             testTreeNode3(root.left);
         }
-        if(root.right != null){
+        if (root.right != null) {
             testTreeNode3(root.right);
         }
 
@@ -248,16 +268,65 @@ public class DataStructeActivity extends Activity {
         root.left = root.right;
         root.right = temp;
 
-        Log.e(TAG,root.item);
+        Log.e(TAG, root.item);
 
         return root;
     }
 
     /**
-     * 二叉树是n个节点的有限集合
+     * 二叉树的先序遍历 根节点 左子树，右子树 中 左 右
+     */
+    private TreeNode<String> testTreeNode4(TreeNode<String> root) {
+        if (root == null)
+            return null;
+
+        Log.e(TAG, root.item);
+
+        if (root.left != null)
+            testTreeNode4(root.left);
+
+        if (root.right != null)
+            testTreeNode4(root.right);
+
+        return root;
+    }
+
+    /**
+     * 二叉树的中序遍历 根节点 左子树，根节点，右子树  左 中 右
+     */
+    private TreeNode<String> testTreeNode5(TreeNode<String> root) {
+        if (root == null)
+            return null;
+
+        testTreeNode5(root.left);
+        Log.e(TAG, root.item);
+        testTreeNode5(root.right);
+
+        return root;
+    }
+
+    /**
+     * 二叉树的后序遍历 左子树 右子树 根节点  左 右 中
+     */
+    private TreeNode<String> testTreeNode6(TreeNode<String> root) {
+        if (root == null)
+            return null;
+
+        testTreeNode5(root.left);
+        testTreeNode5(root.right);
+
+        Log.e(TAG, root.item);
+
+        return root;
+    }
+
+    /**
+     * 二叉树是n个节点的有限集合 树的层次称为树的高度或深度
      * 树只能有一个根节点 节点拥有子数目个数称为度
      * 满二叉树，每个节点都是满的 完全二叉树，允许最后一层的右子树缺失
      * 顺序存储只适合完全二叉树
+     * <p>
+     * 红黑二叉树 自平衡树 根节点是黑色 不能出现两个连续的红色节点，允许出现两个黑色的节点
      */
     static class TreeNode<E> {
         E item;
@@ -268,5 +337,75 @@ public class DataStructeActivity extends Activity {
             this.item = item;
         }
     }
+
+    /**
+     * 1.HashMap使用equals判断key是否与表中的key相等
+     * 2.equals 默认比较对象的地址
+     * 3.利用hashCode值进行运算生成数组的下标
+     */
+    private void testMap() {
+        String a = new String("abc");
+        String b = new String("abc");
+        /**
+         * 第一个判断 如果链表数组为空，或者长度为0 重新创建链表数组
+         * 第二个判断 判断当前链表是否已经在数组中存在 不存在直接创建 存在赋值给p，执行下一步
+         * 如果链表中已经有该元素直接覆盖，并把当前key对应的value赋值给原来的value值，没有直接添加到链表的末尾节点
+         *
+         * 链表是 Node<K,V> implements Map.Entry<K,V>的子类 TreeNode 是Node的子类
+         * 当数据过大时，会将链表转换成红黑二叉树
+         */
+        mHashMap.put(a, "1");
+        mHashMap.put(b, "2");
+        Log.e(TAG, mHashMap.toString());
+
+        Book book = new Book(1);
+        Book book1 = new Book(1);
+        mHashMap1.put(book, "abc");
+        mHashMap1.put(book1, "abc");
+        mHashMap1.get(book1);
+        Log.e(TAG, mHashMap1.toString() + "--" + book.hashCode() + "--" + book1.hashCode());
+
+        mLinkedHashMap.put("1", "a");
+        mLinkedHashMap.get("1");
+
+        mTreeMap.put("1", "2");
+        mTreeMap.get("1");
+        mTreeMap.put("123", "123");
+
+        concurrentHashMap.put("1", "1");
+
+        mHashSet.add("123");
+        mLinkedHashSet.add("123");
+        mTreeSet.add("123");
+    }
+
+    private void testStack() {
+        //数组实现的
+        mStack.push("a");
+        String a = mStack.pop();
+    }
+
+    private void testQueue() {
+        // 将一个元素插入到队尾 插入失败 返回false 多个用户同时访问一个关联表
+        synchronized (mQueue) {
+            mQueue.offer("123");
+            mQueue.add("234");
+        }
+
+        //获取队列头
+        mQueue.peek();
+        mQueue.element();
+
+        //移除并返回队列头
+        mQueue.poll();
+        mQueue.remove();
+
+        mPriortyQueue.add(new String("123"));
+
+        int a = 3;
+        Log.e(TAG, Integer.toBinaryString(a >>> 1) + "-----" +Integer.toBinaryString(a));
+
+    }
+
 
 }

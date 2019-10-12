@@ -59,9 +59,9 @@
         <activity
             android:name=".activity.home.activity.HomeActivity"
             android:screenOrientation="portrait" /> <!-- studyActivity -->
-        <activity
+      <activity
             android:name=".study.ArithmeticActivity"
-            android:screenOrientation="portrait" /> <!-- ArithmeticActivity -->
+            android:screenOrientation="portrait" />  <!-- ArithmeticActivity -->
         <activity
             android:name=".study.DataStructeActivity"
             android:launchMode="singleInstance"
