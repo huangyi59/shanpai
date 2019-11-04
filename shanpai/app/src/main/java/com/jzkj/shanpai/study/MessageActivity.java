@@ -18,7 +18,6 @@ import java.lang.ref.WeakReference;
  * Looper的创建和获取
  * LocalThread泛型类（类型擦除，类型补偿）
  * LocalThreadMap LocalThreadMap.Entry key.hashCode key ThreadLocal value Looper
- *
  */
 public class MessageActivity extends AppCompatActivity {
 
@@ -29,7 +28,7 @@ public class MessageActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Log.e(TAG,msg.what+"-----");
+            Log.e(TAG, msg.what + "-----");
         }
     };
 
@@ -37,14 +36,14 @@ public class MessageActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Log.e(TAG,msg.what+"-----");
+            Log.e(TAG, msg.what + "-----");
         }
     };
 
     private Handler handler3 = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            Log.e(TAG,msg.what+"-----");
+            Log.e(TAG, msg.what + "-----");
             return false;
         }
     });
@@ -82,7 +81,7 @@ public class MessageActivity extends AppCompatActivity {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                Log.e(TAG,3+"-----");
+                Log.e(TAG, 3 + "-----");
             }
         });
 
@@ -91,7 +90,29 @@ public class MessageActivity extends AppCompatActivity {
             public void run() {
 
             }
-        },3000);
+        }, 3000);
+    }
+
+    static class MyHandler extends Handler {
+
+        WeakReference<MessageActivity> weakReference;
+
+        public MyHandler(MessageActivity activity) {
+            weakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            MessageActivity activity = weakReference.get();
+            if (activity != null) {
+                activity.updateTitle((String) msg.obj);
+            }
+        }
+    }
+
+    private void updateTitle(String title){
+
     }
 
 }

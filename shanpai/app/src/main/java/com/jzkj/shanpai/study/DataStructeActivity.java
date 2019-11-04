@@ -72,8 +72,8 @@ public class DataStructeActivity extends Activity {
         setContentView(R.layout.activity_arithmetic);
         tvShow = findViewById(R.id.tv_show);
         //dynamicArray();
-        initLinkedList();
-        testArray();
+        //initLinkedList();
+        //testArray();
 
         //testTreeNode1(initTreeNode());
         //testTreeNode2(initTreeNode());
@@ -83,8 +83,9 @@ public class DataStructeActivity extends Activity {
         //testTreeNode5(initTreeNode());
         //testTreeNode6(initTreeNode());
 
-        testMap();
-        testQueue();
+        //testMap();
+        testLinkedMap();
+        //testQueue();
     }
 
     private void testArray() {
@@ -365,9 +366,6 @@ public class DataStructeActivity extends Activity {
         mHashMap1.get(book1);
         Log.e(TAG, mHashMap1.toString() + "--" + book.hashCode() + "--" + book1.hashCode());
 
-        mLinkedHashMap.put("1", "a");
-        mLinkedHashMap.get("1");
-
         mTreeMap.put("1", "2");
         mTreeMap.get("1");
         mTreeMap.put("123", "123");
@@ -377,6 +375,23 @@ public class DataStructeActivity extends Activity {
         mHashSet.add("123");
         mLinkedHashSet.add("123");
         mTreeSet.add("123");
+    }
+
+    private void testLinkedMap(){
+        mLinkedHashMap.put("1", "a");
+        mLinkedHashMap.put("2", "b");
+        mLinkedHashMap.put("3", "c");
+        Log.e("tag",mLinkedHashMap.toString());
+        mLinkedHashMap.get("3");
+        mLinkedHashMap.get("2");
+        mLinkedHashMap.toString();
+        Log.e("tag",mLinkedHashMap.toString());
+    }
+
+    private void test11(){
+        mHashMap.put("1", "1");
+        mHashMap.put("1", "2");
+        Log.e(TAG, mHashMap.toString());
     }
 
     private void testStack() {
@@ -407,5 +422,22 @@ public class DataStructeActivity extends Activity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("tag","onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("tag","onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("tag","onDestroy");
+    }
 
 }

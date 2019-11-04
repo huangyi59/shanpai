@@ -87,6 +87,10 @@ public class ThreadPoolActivity extends AppCompatActivity {
     private void initThreadPool() {
         mExecutor = new ThreadPoolExecutor(10, 12, 1, TimeUnit.SECONDS, workQueue, sThreadFactory);
 
+        /**
+         * 生产商品，唤醒消费者线程，等待消费
+         * 等待生产商品，消费商品，唤醒生产者线程
+         */
         Car car = new Car();
         mExecutor.execute(new WorkOn(car));
         mExecutor.execute(new WorkOff(car));
@@ -336,6 +340,7 @@ public class ThreadPoolActivity extends AppCompatActivity {
 
             }
         }
+
     }
 
 }

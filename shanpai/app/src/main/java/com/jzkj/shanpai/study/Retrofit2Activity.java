@@ -26,6 +26,11 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableEmitter;
+import io.reactivex.FlowableOnSubscribe;
+import io.reactivex.FlowableSubscriber;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -300,6 +305,47 @@ public class Retrofit2Activity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void test9(){
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> e) throws Exception {
+                //获取下游还能接收多少个数据
+                e.requested();
+                e.onNext(1);
+                e.onComplete();
+            }
+        }, BackpressureStrategy.ERROR).onBackpressureBuffer(10,true)
+          .subscribe(new FlowableSubscriber<Integer>() {
+              @Override
+              public void onSubscribe(Subscription s) {
+                  //只有调用s.request才会接受数据
+                  s.request(3);
+              }
+
+              @Override
+              public void onNext(Integer integer) {
+
+              }
+
+              @Override
+              public void onError(Throwable t) {
+
+              }
+
+              @Override
+              public void onComplete() {
+
+              }
+          });
+    }
+
+    private void test10(){
+        Flowable
+                .just(1)
+                .onBackpressureDrop()
+                .subscribe();
     }
 
 }
