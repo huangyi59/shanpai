@@ -61,7 +61,7 @@ public class StudyActity extends Activity implements ServiceConnection {
                 skipToActivity(this, ArithmeticActivity.class);
                 break;
             case R.id.btn_data_stucture:
-                skipToActivity(this, MediaPalyerActivity.class);
+                skipToActivity(this, HotFixActivity.class);
                 //ARouter.getInstance().build("mymodle/LoginActivity").navigation();
                 break;
             case R.id.btn_android:
@@ -136,7 +136,7 @@ public class StudyActity extends Activity implements ServiceConnection {
     private void testReflect(String test) {
         Class clz = StudyActity.class;
         try {
-            Method method = clz.getMethod("create", String.class);
+            Method method = clz.getDeclaredMethod("create", String.class);
             try {
                 method.invoke(clz, test);
             } catch (IllegalAccessException e) {

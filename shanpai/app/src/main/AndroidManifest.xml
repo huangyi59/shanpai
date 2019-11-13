@@ -26,7 +26,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".study.MediaPalyerActivity"></activity>
+        <activity android:name=".study.HotFixActivity"></activity>
+        <activity android:name=".study.MediaPalyerActivity" />
         <activity android:name=".study.GlideActivity" />
         <activity android:name=".study.CustomeActivity" />
         <activity

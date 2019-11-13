@@ -169,7 +169,7 @@ public class ThreadPoolActivity extends AppCompatActivity {
     }
 
     /**
-     * 线程的几种状态 创建 就绪 阻塞 死亡
+     * 死亡线程的几种状态 创建 就绪 阻塞
      * 调用wait 和 sleep方法可以让线程进入阻塞状态 interceput方法用来中断一个正在运行的线程或则阻塞的线程
      * 你可以中断一个调用了sleep方法而进入的阻塞状态 但你无法中断一个尝试获取锁和IO状态的任务
      * 调用sleep的时候并没有释放锁，调用wait的时候释放了锁，调用wait,notify,notifyAll,都必须获取对象的锁才能调用

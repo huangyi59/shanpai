@@ -59,6 +59,8 @@ public class MessageActivity extends AppCompatActivity {
         // 当前线程的全局变量ThreadLocalMap ->Entry(T values)
         Looper.prepare();
         Looper.myLooper();
+        //如何判断是否在主线程
+        if(Looper.myLooper() == Looper.getMainLooper()){}
         // Looper.prepare(); Looper.prepareMainLooper(); One Looper may be created per Thread
         // send系列方法 将Message放入消息队列中 Looer.looper -> Message.next() msg.target.dispatchMessage(msg);
         // 一个Message只能被发送一次 每个Message绑定一个Handler enqueueMessage将Handler与Message进行绑定
@@ -111,7 +113,7 @@ public class MessageActivity extends AppCompatActivity {
         }
     }
 
-    private void updateTitle(String title){
+    private void  updateTitle(String title){
 
     }
 

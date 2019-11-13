@@ -107,6 +107,7 @@ public class ThreadActivity extends AppCompatActivity {
         @Override
         protected Object doInBackground(String[] objects) {
             try {
+                //不释放锁，wait释放锁
                 Thread.sleep(2000);
                 publishProgress(0);
             } catch (InterruptedException e) {
